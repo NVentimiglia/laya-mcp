@@ -1,0 +1,776 @@
+{
+  "meta": {
+    "date": "2026-09-19T03:58:21Z",
+    "suite": "default",
+    "laya_model_id": "convaiinnovations/laya",
+    "fixtures": 12,
+    "category_filter": null
+  },
+  "laya": {
+    "model": "Laya",
+    "overall": {
+      "correct": 17,
+      "total": 28,
+      "accuracy": 0.6071
+    },
+    "avg_latency_ms": 107.88,
+    "by_category": {
+      "medical_triage": {
+        "correct": 5,
+        "total": 8,
+        "accuracy": 0.625
+      },
+      "legal_review": {
+        "correct": 6,
+        "total": 12,
+        "accuracy": 0.5
+      },
+      "credit_ops": {
+        "correct": 6,
+        "total": 8,
+        "accuracy": 0.75
+      }
+    },
+    "by_difficulty": {
+      "hard": {
+        "correct": 5,
+        "total": 7,
+        "accuracy": 0.7143
+      },
+      "easy": {
+        "correct": 7,
+        "total": 9,
+        "accuracy": 0.7778
+      },
+      "medium": {
+        "correct": 5,
+        "total": 12,
+        "accuracy": 0.4167
+      }
+    },
+    "fixtures": [
+      {
+        "id": "med_chest_pain_stemi",
+        "category": "medical_triage",
+        "difficulty": "hard",
+        "ground_truth": {
+          "acuity": "immediate",
+          "needs_ecg": true
+        },
+        "predicted": {
+          "acuity": "immediate",
+          "needs_ecg": 0.1825
+        },
+        "correct": 1,
+        "total": 2,
+        "accuracy": 0.5,
+        "latency_ms": 979.55,
+        "error": null
+      },
+      {
+        "id": "med_ankle_sprain",
+        "category": "medical_triage",
+        "difficulty": "easy",
+        "ground_truth": {
+          "acuity": "less_urgent",
+          "needs_ecg": false
+        },
+        "predicted": {
+          "acuity": "non_urgent",
+          "needs_ecg": 0.0001
+        },
+        "correct": 1,
+        "total": 2,
+        "accuracy": 0.5,
+        "latency_ms": 33.87,
+        "error": null
+      },
+      {
+        "id": "med_infant_fever",
+        "category": "medical_triage",
+        "difficulty": "medium",
+        "ground_truth": {
+          "acuity": "urgent",
+          "needs_ecg": false
+        },
+        "predicted": {
+          "acuity": "non_urgent",
+          "needs_ecg": 0.0667
+        },
+        "correct": 1,
+        "total": 2,
+        "accuracy": 0.5,
+        "latency_ms": 25.94,
+        "error": null
+      },
+      {
+        "id": "med_rx_refill",
+        "category": "medical_triage",
+        "difficulty": "easy",
+        "ground_truth": {
+          "acuity": "non_urgent",
+          "needs_ecg": false
+        },
+        "predicted": {
+          "acuity": "non_urgent",
+          "needs_ecg": 0.0
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 28.42,
+        "error": null
+      },
+      {
+        "id": "legal_attorney_client",
+        "category": "legal_review",
+        "difficulty": "medium",
+        "ground_truth": {
+          "is_privileged": true,
+          "risk": "high",
+          "action": "escalate"
+        },
+        "predicted": {
+          "is_privileged": 0.9176,
+          "risk": "high",
+          "action": "proceed"
+        },
+        "correct": 2,
+        "total": 3,
+        "accuracy": 0.6667,
+        "latency_ms": 29.21,
+        "error": null
+      },
+      {
+        "id": "legal_public_docket",
+        "category": "legal_review",
+        "difficulty": "easy",
+        "ground_truth": {
+          "is_privileged": false,
+          "risk": "low",
+          "action": "proceed"
+        },
+        "predicted": {
+          "is_privileged": 0.5578,
+          "risk": "low",
+          "action": "proceed"
+        },
+        "correct": 2,
+        "total": 3,
+        "accuracy": 0.6667,
+        "latency_ms": 26.66,
+        "error": null
+      },
+      {
+        "id": "legal_indemnity_unlimited",
+        "category": "legal_review",
+        "difficulty": "hard",
+        "ground_truth": {
+          "is_privileged": false,
+          "risk": "high",
+          "action": "escalate"
+        },
+        "predicted": {
+          "is_privileged": 0.4734,
+          "risk": "high",
+          "action": "proceed"
+        },
+        "correct": 2,
+        "total": 3,
+        "accuracy": 0.6667,
+        "latency_ms": 34.68,
+        "error": null
+      },
+      {
+        "id": "legal_nda_standard",
+        "category": "legal_review",
+        "difficulty": "medium",
+        "ground_truth": {
+          "is_privileged": false,
+          "risk": "medium",
+          "action": "review"
+        },
+        "predicted": {
+          "is_privileged": 0.7093,
+          "risk": "high",
+          "action": "proceed"
+        },
+        "correct": 0,
+        "total": 3,
+        "accuracy": 0.0,
+        "latency_ms": 28.09,
+        "error": null
+      },
+      {
+        "id": "credit_clean_approve",
+        "category": "credit_ops",
+        "difficulty": "easy",
+        "ground_truth": {
+          "credit_decision": "approve",
+          "fraud_risk": false
+        },
+        "predicted": {
+          "credit_decision": "approve",
+          "fraud_risk": 0.1502
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 26.25,
+        "error": null
+      },
+      {
+        "id": "credit_thin_file_refer",
+        "category": "credit_ops",
+        "difficulty": "medium",
+        "ground_truth": {
+          "credit_decision": "refer",
+          "fraud_risk": false
+        },
+        "predicted": {
+          "credit_decision": "approve",
+          "fraud_risk": 0.18
+        },
+        "correct": 1,
+        "total": 2,
+        "accuracy": 0.5,
+        "latency_ms": 28.34,
+        "error": null
+      },
+      {
+        "id": "credit_fraud_decline",
+        "category": "credit_ops",
+        "difficulty": "hard",
+        "ground_truth": {
+          "credit_decision": "decline",
+          "fraud_risk": true
+        },
+        "predicted": {
+          "credit_decision": "decline",
+          "fraud_risk": 0.7709
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 28.76,
+        "error": null
+      },
+      {
+        "id": "credit_borderline_refer",
+        "category": "credit_ops",
+        "difficulty": "medium",
+        "ground_truth": {
+          "credit_decision": "refer",
+          "fraud_risk": false
+        },
+        "predicted": {
+          "credit_decision": "approve",
+          "fraud_risk": 0.233
+        },
+        "correct": 1,
+        "total": 2,
+        "accuracy": 0.5,
+        "latency_ms": 24.83,
+        "error": null
+      }
+    ]
+  },
+  "jev": {
+    "model": "Jev (jev-latest)",
+    "overall": {
+      "correct": 28,
+      "total": 28,
+      "accuracy": 1.0
+    },
+    "avg_latency_ms": 161.17,
+    "by_category": {
+      "medical_triage": {
+        "correct": 8,
+        "total": 8,
+        "accuracy": 1.0
+      },
+      "legal_review": {
+        "correct": 12,
+        "total": 12,
+        "accuracy": 1.0
+      },
+      "credit_ops": {
+        "correct": 8,
+        "total": 8,
+        "accuracy": 1.0
+      }
+    },
+    "by_difficulty": {
+      "hard": {
+        "correct": 7,
+        "total": 7,
+        "accuracy": 1.0
+      },
+      "easy": {
+        "correct": 9,
+        "total": 9,
+        "accuracy": 1.0
+      },
+      "medium": {
+        "correct": 12,
+        "total": 12,
+        "accuracy": 1.0
+      }
+    },
+    "fixtures": [
+      {
+        "id": "med_chest_pain_stemi",
+        "category": "medical_triage",
+        "difficulty": "hard",
+        "ground_truth": {
+          "acuity": "immediate",
+          "needs_ecg": true
+        },
+        "predicted": {
+          "acuity": "immediate",
+          "needs_ecg": 0.97
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 301.07,
+        "error": null
+      },
+      {
+        "id": "med_ankle_sprain",
+        "category": "medical_triage",
+        "difficulty": "easy",
+        "ground_truth": {
+          "acuity": "less_urgent",
+          "needs_ecg": false
+        },
+        "predicted": {
+          "acuity": "less_urgent",
+          "needs_ecg": 0.05
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 289.32,
+        "error": null
+      },
+      {
+        "id": "med_infant_fever",
+        "category": "medical_triage",
+        "difficulty": "medium",
+        "ground_truth": {
+          "acuity": "urgent",
+          "needs_ecg": false
+        },
+        "predicted": {
+          "acuity": "urgent",
+          "needs_ecg": 0.11
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 130.16,
+        "error": null
+      },
+      {
+        "id": "med_rx_refill",
+        "category": "medical_triage",
+        "difficulty": "easy",
+        "ground_truth": {
+          "acuity": "non_urgent",
+          "needs_ecg": false
+        },
+        "predicted": {
+          "acuity": "non_urgent",
+          "needs_ecg": 0.06
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 140.63,
+        "error": null
+      },
+      {
+        "id": "legal_attorney_client",
+        "category": "legal_review",
+        "difficulty": "medium",
+        "ground_truth": {
+          "is_privileged": true,
+          "risk": "high",
+          "action": "escalate"
+        },
+        "predicted": {
+          "is_privileged": 0.87,
+          "risk": "high",
+          "action": "escalate"
+        },
+        "correct": 3,
+        "total": 3,
+        "accuracy": 1.0,
+        "latency_ms": 134.02,
+        "error": null
+      },
+      {
+        "id": "legal_public_docket",
+        "category": "legal_review",
+        "difficulty": "easy",
+        "ground_truth": {
+          "is_privileged": false,
+          "risk": "low",
+          "action": "proceed"
+        },
+        "predicted": {
+          "is_privileged": 0.04,
+          "risk": "low",
+          "action": "proceed"
+        },
+        "correct": 3,
+        "total": 3,
+        "accuracy": 1.0,
+        "latency_ms": 124.55,
+        "error": null
+      },
+      {
+        "id": "legal_indemnity_unlimited",
+        "category": "legal_review",
+        "difficulty": "hard",
+        "ground_truth": {
+          "is_privileged": false,
+          "risk": "high",
+          "action": "escalate"
+        },
+        "predicted": {
+          "is_privileged": 0.13,
+          "risk": "high",
+          "action": "escalate"
+        },
+        "correct": 3,
+        "total": 3,
+        "accuracy": 1.0,
+        "latency_ms": 98.61,
+        "error": null
+      },
+      {
+        "id": "legal_nda_standard",
+        "category": "legal_review",
+        "difficulty": "medium",
+        "ground_truth": {
+          "is_privileged": false,
+          "risk": "medium",
+          "action": "review"
+        },
+        "predicted": {
+          "is_privileged": 0.09,
+          "risk": "medium",
+          "action": "review"
+        },
+        "correct": 3,
+        "total": 3,
+        "accuracy": 1.0,
+        "latency_ms": 147.25,
+        "error": null
+      },
+      {
+        "id": "credit_clean_approve",
+        "category": "credit_ops",
+        "difficulty": "easy",
+        "ground_truth": {
+          "credit_decision": "approve",
+          "fraud_risk": false
+        },
+        "predicted": {
+          "credit_decision": "approve",
+          "fraud_risk": 0.04
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 83.19,
+        "error": null
+      },
+      {
+        "id": "credit_thin_file_refer",
+        "category": "credit_ops",
+        "difficulty": "medium",
+        "ground_truth": {
+          "credit_decision": "refer",
+          "fraud_risk": false
+        },
+        "predicted": {
+          "credit_decision": "refer",
+          "fraud_risk": 0.05
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 131.93,
+        "error": null
+      },
+      {
+        "id": "credit_fraud_decline",
+        "category": "credit_ops",
+        "difficulty": "hard",
+        "ground_truth": {
+          "credit_decision": "decline",
+          "fraud_risk": true
+        },
+        "predicted": {
+          "credit_decision": "decline",
+          "fraud_risk": 0.97
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 112.86,
+        "error": null
+      },
+      {
+        "id": "credit_borderline_refer",
+        "category": "credit_ops",
+        "difficulty": "medium",
+        "ground_truth": {
+          "credit_decision": "refer",
+          "fraud_risk": false
+        },
+        "predicted": {
+          "credit_decision": "refer",
+          "fraud_risk": 0.04
+        },
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0,
+        "latency_ms": 240.42,
+        "error": null
+      }
+    ]
+  },
+  "ollama": {
+    "model": "Ollama (gemma4:latest)",
+    "overall": {
+      "correct": 0,
+      "total": 28,
+      "accuracy": 0.0
+    },
+    "avg_latency_ms": 3887.74,
+    "by_category": {
+      "medical_triage": {
+        "correct": 0,
+        "total": 8,
+        "accuracy": 0.0
+      },
+      "legal_review": {
+        "correct": 0,
+        "total": 12,
+        "accuracy": 0.0
+      },
+      "credit_ops": {
+        "correct": 0,
+        "total": 8,
+        "accuracy": 0.0
+      }
+    },
+    "by_difficulty": {
+      "hard": {
+        "correct": 0,
+        "total": 7,
+        "accuracy": 0.0
+      },
+      "easy": {
+        "correct": 0,
+        "total": 9,
+        "accuracy": 0.0
+      },
+      "medium": {
+        "correct": 0,
+        "total": 12,
+        "accuracy": 0.0
+      }
+    },
+    "fixtures": [
+      {
+        "id": "med_chest_pain_stemi",
+        "category": "medical_triage",
+        "difficulty": "hard",
+        "ground_truth": {
+          "acuity": "immediate",
+          "needs_ecg": true
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 2,
+        "accuracy": 0.0,
+        "latency_ms": 14616.87,
+        "error": null
+      },
+      {
+        "id": "med_ankle_sprain",
+        "category": "medical_triage",
+        "difficulty": "easy",
+        "ground_truth": {
+          "acuity": "less_urgent",
+          "needs_ecg": false
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 2,
+        "accuracy": 0.0,
+        "latency_ms": 2941.9,
+        "error": null
+      },
+      {
+        "id": "med_infant_fever",
+        "category": "medical_triage",
+        "difficulty": "medium",
+        "ground_truth": {
+          "acuity": "urgent",
+          "needs_ecg": false
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 2,
+        "accuracy": 0.0,
+        "latency_ms": 2883.22,
+        "error": null
+      },
+      {
+        "id": "med_rx_refill",
+        "category": "medical_triage",
+        "difficulty": "easy",
+        "ground_truth": {
+          "acuity": "non_urgent",
+          "needs_ecg": false
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 2,
+        "accuracy": 0.0,
+        "latency_ms": 2862.52,
+        "error": null
+      },
+      {
+        "id": "legal_attorney_client",
+        "category": "legal_review",
+        "difficulty": "medium",
+        "ground_truth": {
+          "is_privileged": true,
+          "risk": "high",
+          "action": "escalate"
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 3,
+        "accuracy": 0.0,
+        "latency_ms": 2907.69,
+        "error": null
+      },
+      {
+        "id": "legal_public_docket",
+        "category": "legal_review",
+        "difficulty": "easy",
+        "ground_truth": {
+          "is_privileged": false,
+          "risk": "low",
+          "action": "proceed"
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 3,
+        "accuracy": 0.0,
+        "latency_ms": 2875.06,
+        "error": null
+      },
+      {
+        "id": "legal_indemnity_unlimited",
+        "category": "legal_review",
+        "difficulty": "hard",
+        "ground_truth": {
+          "is_privileged": false,
+          "risk": "high",
+          "action": "escalate"
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 3,
+        "accuracy": 0.0,
+        "latency_ms": 2865.71,
+        "error": null
+      },
+      {
+        "id": "legal_nda_standard",
+        "category": "legal_review",
+        "difficulty": "medium",
+        "ground_truth": {
+          "is_privileged": false,
+          "risk": "medium",
+          "action": "review"
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 3,
+        "accuracy": 0.0,
+        "latency_ms": 2979.43,
+        "error": null
+      },
+      {
+        "id": "credit_clean_approve",
+        "category": "credit_ops",
+        "difficulty": "easy",
+        "ground_truth": {
+          "credit_decision": "approve",
+          "fraud_risk": false
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 2,
+        "accuracy": 0.0,
+        "latency_ms": 2935.22,
+        "error": null
+      },
+      {
+        "id": "credit_thin_file_refer",
+        "category": "credit_ops",
+        "difficulty": "medium",
+        "ground_truth": {
+          "credit_decision": "refer",
+          "fraud_risk": false
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 2,
+        "accuracy": 0.0,
+        "latency_ms": 2875.36,
+        "error": null
+      },
+      {
+        "id": "credit_fraud_decline",
+        "category": "credit_ops",
+        "difficulty": "hard",
+        "ground_truth": {
+          "credit_decision": "decline",
+          "fraud_risk": true
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 2,
+        "accuracy": 0.0,
+        "latency_ms": 2972.99,
+        "error": null
+      },
+      {
+        "id": "credit_borderline_refer",
+        "category": "credit_ops",
+        "difficulty": "medium",
+        "ground_truth": {
+          "credit_decision": "refer",
+          "fraud_risk": false
+        },
+        "predicted": {},
+        "correct": 0,
+        "total": 2,
+        "accuracy": 0.0,
+        "latency_ms": 2936.87,
+        "error": null
+      }
+    ]
+  }
+}

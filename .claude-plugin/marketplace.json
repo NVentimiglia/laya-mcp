@@ -1,0 +1,33 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "laya-mcp",
+  "owner": {
+    "name": "Nicholas Ventimiglia",
+    "url": "https://github.com/NVentimiglia"
+  },
+  "metadata": {
+    "description": "Laya MCP server and skill for fixed-shape decisions in coding agents.",
+    "version": "0.1.0",
+    "pluginRoot": "./.github/plugins"
+  },
+  "plugins": [
+    {
+      "name": "laya",
+      "source": "./.github/plugins/laya",
+      "description": "Laya MCP and skill for routing, classification, guardrails, and PR triage.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Nicholas Ventimiglia",
+        "url": "https://github.com/NVentimiglia"
+      },
+      "homepage": "https://github.com/NVentimiglia/laya-mcp/tree/main/.github/plugins/laya",
+      "repository": "https://github.com/NVentimiglia/laya-mcp",
+      "license": "MIT",
+      "keywords": ["laya", "mcp", "decision", "guardrails", "routing"],
+      "category": "productivity",
+      "skills": ["./skills/"],
+      "mcpServers": "./.mcp.json",
+      "strict": true
+    }
+  ]
+}

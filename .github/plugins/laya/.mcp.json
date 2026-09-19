@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "laya": {
+      "command": "laya-mcp",
+      "env": {
+        "LAYA_MODEL_ID": "convaiinnovations/laya",
+        "LAYA_MAX_STATE_TOKENS": "512",
+        "LAYA_CONFIDENCE_THRESHOLD": "0.85"
+      }
+    }
+  }
+}

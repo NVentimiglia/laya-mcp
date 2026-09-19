@@ -1,0 +1,22 @@
+.env
+laya-jev/.env
+jev.key
+*.key
+__pycache__/
+.pytest_cache/
+*.pyc
+dist/
+build/
+*.egg-info/
+.venv/
+skills-lock.json
+/.agents/skills/typesafe-ai/
+
+# BEGIN agent-kit
+/.cursor
+/.claude
+/CLAUDE.md
+/.agents/hooks.json
+/.agents/plugins/
+/.agents/hooks/_*
+# END agent-kit

@@ -1,0 +1,4 @@
+laya>=0.1.0
+torch>=2.1.0
+requests>=2.31.0
+typesafe-sdk>=0.1.0

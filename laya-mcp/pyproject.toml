@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "laya-mcp"
+version = "0.1.0"
+description = "MCP server exposing Laya's non-autoregressive decision engine to LLM hosts"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Nicholas Ventimiglia" },
+]
+requires-python = ">=3.10"
+keywords = ["laya", "mcp", "decision", "llm", "ai", "guardrails", "routing"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+  "mcp[cli]>=1.0.0",
+  "laya>=0.1.0",
+  "torch>=2.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/NVentimiglia/laya-mcp"
+Model = "https://huggingface.co/convaiinnovations/laya"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "ruff>=0.4.0",
+]
+
+[project.scripts]
+laya-mcp = "laya_mcp_server:main_sync"
+
+# laya_mcp_server.py lives directly in this directory (not in a sub-package).
+# Declare it as a top-level py_modules entry so setuptools includes it.
+[tool.setuptools]
+py-modules = ["laya_mcp_server"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

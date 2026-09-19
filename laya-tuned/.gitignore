@@ -1,0 +1,13 @@
+# Generated SIE (or other domain) train/holdout — never commit.
+train_sie.json
+train_*.json
+eval_holdout.json
+holdout_*.json
+eval_results*.json
+*.jsonl
+
+# Domain checkpoints — never overwrite convaiinnovations/laya
+checkpoints/
+*.pt
+*.bin
+*.safetensors

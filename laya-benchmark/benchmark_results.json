@@ -1,0 +1,1155 @@
+{
+  "meta": {
+    "date": "2026-09-19T03:23:47Z",
+    "n_passes": 5,
+    "fixtures": 6,
+    "ollama_model": "gemma4:latest",
+    "jev_model": "jev-latest"
+  },
+  "laya": {
+    "model": "convaiinnovations/laya",
+    "avg_latency_ms": 61.79,
+    "avg_mem_delta_mb": 36.18,
+    "accuracy": 0.6923,
+    "calls": [
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 996.4814999839291,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 1036.0390625,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"safety\": {\"type\": \"choice\", \"choice\": \"safe\", \"probabilities\": {\"safe\": 0.5331, \"risky\": 0.1702, \"unsafe\": 0.2967}, \"confidence\": 0.0923, \"action\": {\"act_probability\": 1.0}}, \"needs_review\": {\"type\": \"noul\", \"noul\": 0.068, \"confidence\": 0.932, \"action\": {\"act_probability\": 1.0}}, \"action\": {\"type\": \"choice\", \"choice\": \"request_changes\", \"probabilities\": {\"merge\": 0.2834, \"request_changes\": 0.432, \"escalate\": 0.2846}, \"confidence\": 0.0191, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 614, \"output_tokens\": 0}}",
+        "parsed": {
+          "safety": "safe",
+          "needs_review": 0.068,
+          "action": "request_changes"
+        },
+        "correct_keys": 2,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 29.425200016703457,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.30078125,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"safety\": {\"type\": \"choice\", \"choice\": \"safe\", \"probabilities\": {\"safe\": 0.7089, \"risky\": 0.1312, \"unsafe\": 0.1599}, \"confidence\": 0.2686, \"action\": {\"act_probability\": 1.0}}, \"needs_review\": {\"type\": \"noul\", \"noul\": 0.0995, \"confidence\": 0.9005, \"action\": {\"act_probability\": 1.0}}, \"action\": {\"type\": \"choice\", \"choice\": \"request_changes\", \"probabilities\": {\"merge\": 0.3681, \"request_changes\": 0.472, \"escalate\": 0.1598}, \"confidence\": 0.0758, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 428, \"output_tokens\": 0}}",
+        "parsed": {
+          "safety": "safe",
+          "needs_review": 0.0995,
+          "action": "request_changes"
+        },
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 80.09210001910105,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 48.5234375,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"department\": {\"type\": \"choice\", \"choice\": \"billing\", \"probabilities\": {\"billing\": 0.9492, \"technical\": 0.0176, \"sales\": 0.0194, \"other\": 0.0138}, \"confidence\": 0.8151, \"action\": {\"act_probability\": 1.0}}, \"churn_risk\": {\"type\": \"noul\", \"noul\": 0.8724, \"confidence\": 0.8724, \"action\": {\"act_probability\": 1.0}}, \"is_phishing\": {\"type\": \"noul\", \"noul\": 0.0987, \"confidence\": 0.9013, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 246, \"output_tokens\": 0}}",
+        "parsed": {
+          "department": "billing",
+          "churn_risk": 0.8724,
+          "is_phishing": 0.0987
+        },
+        "correct_keys": 3,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 36.21760004898533,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.08203125,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"is_jailbreak\": {\"type\": \"noul\", \"noul\": 1.0, \"confidence\": 1.0, \"action\": {\"act_probability\": 1.0}}, \"is_injection\": {\"type\": \"noul\", \"noul\": 1.0, \"confidence\": 1.0, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 101, \"output_tokens\": 0}}",
+        "parsed": {
+          "is_jailbreak": 1.0,
+          "is_injection": 1.0
+        },
+        "correct_keys": 2,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 34.830400021746755,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.1875,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"model\": {\"type\": \"choice\", \"choice\": \"light\", \"probabilities\": {\"light\": 0.7665, \"frontier\": 0.2335}, \"confidence\": 0.2159, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 54, \"output_tokens\": 0}}",
+        "parsed": {
+          "model": "light"
+        },
+        "correct_keys": 1,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 31.113100005313754,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"model\": {\"type\": \"choice\", \"choice\": \"frontier\", \"probabilities\": {\"light\": 0.2335, \"frontier\": 0.7665}, \"confidence\": 0.2159, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 75, \"output_tokens\": 0}}",
+        "parsed": {
+          "model": "frontier"
+        },
+        "correct_keys": 1,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 27.525800047442317,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.05078125,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"safety\": {\"type\": \"choice\", \"choice\": \"safe\", \"probabilities\": {\"safe\": 0.5331, \"risky\": 0.1702, \"unsafe\": 0.2967}, \"confidence\": 0.0923, \"action\": {\"act_probability\": 1.0}}, \"needs_review\": {\"type\": \"noul\", \"noul\": 0.068, \"confidence\": 0.932, \"action\": {\"act_probability\": 1.0}}, \"action\": {\"type\": \"choice\", \"choice\": \"request_changes\", \"probabilities\": {\"merge\": 0.2834, \"request_changes\": 0.432, \"escalate\": 0.2846}, \"confidence\": 0.0191, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 614, \"output_tokens\": 0}}",
+        "parsed": {
+          "safety": "safe",
+          "needs_review": 0.068,
+          "action": "request_changes"
+        },
+        "correct_keys": 2,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 27.298000000882894,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.09375,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"safety\": {\"type\": \"choice\", \"choice\": \"safe\", \"probabilities\": {\"safe\": 0.7089, \"risky\": 0.1312, \"unsafe\": 0.1599}, \"confidence\": 0.2686, \"action\": {\"act_probability\": 1.0}}, \"needs_review\": {\"type\": \"noul\", \"noul\": 0.0995, \"confidence\": 0.9005, \"action\": {\"act_probability\": 1.0}}, \"action\": {\"type\": \"choice\", \"choice\": \"request_changes\", \"probabilities\": {\"merge\": 0.3681, \"request_changes\": 0.472, \"escalate\": 0.1598}, \"confidence\": 0.0758, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 428, \"output_tokens\": 0}}",
+        "parsed": {
+          "safety": "safe",
+          "needs_review": 0.0995,
+          "action": "request_changes"
+        },
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 26.678800000809133,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.00390625,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"department\": {\"type\": \"choice\", \"choice\": \"billing\", \"probabilities\": {\"billing\": 0.9492, \"technical\": 0.0176, \"sales\": 0.0194, \"other\": 0.0138}, \"confidence\": 0.8151, \"action\": {\"act_probability\": 1.0}}, \"churn_risk\": {\"type\": \"noul\", \"noul\": 0.8724, \"confidence\": 0.8724, \"action\": {\"act_probability\": 1.0}}, \"is_phishing\": {\"type\": \"noul\", \"noul\": 0.0987, \"confidence\": 0.9013, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 246, \"output_tokens\": 0}}",
+        "parsed": {
+          "department": "billing",
+          "churn_risk": 0.8724,
+          "is_phishing": 0.0987
+        },
+        "correct_keys": 3,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 27.724099985789508,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.00390625,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"is_jailbreak\": {\"type\": \"noul\", \"noul\": 1.0, \"confidence\": 1.0, \"action\": {\"act_probability\": 1.0}}, \"is_injection\": {\"type\": \"noul\", \"noul\": 1.0, \"confidence\": 1.0, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 101, \"output_tokens\": 0}}",
+        "parsed": {
+          "is_jailbreak": 1.0,
+          "is_injection": 1.0
+        },
+        "correct_keys": 2,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 24.65680002933368,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"model\": {\"type\": \"choice\", \"choice\": \"light\", \"probabilities\": {\"light\": 0.7665, \"frontier\": 0.2335}, \"confidence\": 0.2159, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 54, \"output_tokens\": 0}}",
+        "parsed": {
+          "model": "light"
+        },
+        "correct_keys": 1,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 24.83780001057312,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"model\": {\"type\": \"choice\", \"choice\": \"frontier\", \"probabilities\": {\"light\": 0.2335, \"frontier\": 0.7665}, \"confidence\": 0.2159, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 75, \"output_tokens\": 0}}",
+        "parsed": {
+          "model": "frontier"
+        },
+        "correct_keys": 1,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 28.568499954417348,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.04296875,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"safety\": {\"type\": \"choice\", \"choice\": \"safe\", \"probabilities\": {\"safe\": 0.5331, \"risky\": 0.1702, \"unsafe\": 0.2967}, \"confidence\": 0.0923, \"action\": {\"act_probability\": 1.0}}, \"needs_review\": {\"type\": \"noul\", \"noul\": 0.068, \"confidence\": 0.932, \"action\": {\"act_probability\": 1.0}}, \"action\": {\"type\": \"choice\", \"choice\": \"request_changes\", \"probabilities\": {\"merge\": 0.2834, \"request_changes\": 0.432, \"escalate\": 0.2846}, \"confidence\": 0.0191, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 614, \"output_tokens\": 0}}",
+        "parsed": {
+          "safety": "safe",
+          "needs_review": 0.068,
+          "action": "request_changes"
+        },
+        "correct_keys": 2,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 26.505600020755082,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.00390625,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"safety\": {\"type\": \"choice\", \"choice\": \"safe\", \"probabilities\": {\"safe\": 0.7089, \"risky\": 0.1312, \"unsafe\": 0.1599}, \"confidence\": 0.2686, \"action\": {\"act_probability\": 1.0}}, \"needs_review\": {\"type\": \"noul\", \"noul\": 0.0995, \"confidence\": 0.9005, \"action\": {\"act_probability\": 1.0}}, \"action\": {\"type\": \"choice\", \"choice\": \"request_changes\", \"probabilities\": {\"merge\": 0.3681, \"request_changes\": 0.472, \"escalate\": 0.1598}, \"confidence\": 0.0758, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 428, \"output_tokens\": 0}}",
+        "parsed": {
+          "safety": "safe",
+          "needs_review": 0.0995,
+          "action": "request_changes"
+        },
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 28.411800041794777,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"department\": {\"type\": \"choice\", \"choice\": \"billing\", \"probabilities\": {\"billing\": 0.9492, \"technical\": 0.0176, \"sales\": 0.0194, \"other\": 0.0138}, \"confidence\": 0.8151, \"action\": {\"act_probability\": 1.0}}, \"churn_risk\": {\"type\": \"noul\", \"noul\": 0.8724, \"confidence\": 0.8724, \"action\": {\"act_probability\": 1.0}}, \"is_phishing\": {\"type\": \"noul\", \"noul\": 0.0987, \"confidence\": 0.9013, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 246, \"output_tokens\": 0}}",
+        "parsed": {
+          "department": "billing",
+          "churn_risk": 0.8724,
+          "is_phishing": 0.0987
+        },
+        "correct_keys": 3,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 27.527799946255982,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"is_jailbreak\": {\"type\": \"noul\", \"noul\": 1.0, \"confidence\": 1.0, \"action\": {\"act_probability\": 1.0}}, \"is_injection\": {\"type\": \"noul\", \"noul\": 1.0, \"confidence\": 1.0, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 101, \"output_tokens\": 0}}",
+        "parsed": {
+          "is_jailbreak": 1.0,
+          "is_injection": 1.0
+        },
+        "correct_keys": 2,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 23.863800044637173,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"model\": {\"type\": \"choice\", \"choice\": \"light\", \"probabilities\": {\"light\": 0.7665, \"frontier\": 0.2335}, \"confidence\": 0.2159, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 54, \"output_tokens\": 0}}",
+        "parsed": {
+          "model": "light"
+        },
+        "correct_keys": 1,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 26.1566000408493,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"model\": {\"type\": \"choice\", \"choice\": \"frontier\", \"probabilities\": {\"light\": 0.2335, \"frontier\": 0.7665}, \"confidence\": 0.2159, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 75, \"output_tokens\": 0}}",
+        "parsed": {
+          "model": "frontier"
+        },
+        "correct_keys": 1,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 27.076800004579127,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"safety\": {\"type\": \"choice\", \"choice\": \"safe\", \"probabilities\": {\"safe\": 0.5331, \"risky\": 0.1702, \"unsafe\": 0.2967}, \"confidence\": 0.0923, \"action\": {\"act_probability\": 1.0}}, \"needs_review\": {\"type\": \"noul\", \"noul\": 0.068, \"confidence\": 0.932, \"action\": {\"act_probability\": 1.0}}, \"action\": {\"type\": \"choice\", \"choice\": \"request_changes\", \"probabilities\": {\"merge\": 0.2834, \"request_changes\": 0.432, \"escalate\": 0.2846}, \"confidence\": 0.0191, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 614, \"output_tokens\": 0}}",
+        "parsed": {
+          "safety": "safe",
+          "needs_review": 0.068,
+          "action": "request_changes"
+        },
+        "correct_keys": 2,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 27.137800003401935,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.00390625,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"safety\": {\"type\": \"choice\", \"choice\": \"safe\", \"probabilities\": {\"safe\": 0.7089, \"risky\": 0.1312, \"unsafe\": 0.1599}, \"confidence\": 0.2686, \"action\": {\"act_probability\": 1.0}}, \"needs_review\": {\"type\": \"noul\", \"noul\": 0.0995, \"confidence\": 0.9005, \"action\": {\"act_probability\": 1.0}}, \"action\": {\"type\": \"choice\", \"choice\": \"request_changes\", \"probabilities\": {\"merge\": 0.3681, \"request_changes\": 0.472, \"escalate\": 0.1598}, \"confidence\": 0.0758, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 428, \"output_tokens\": 0}}",
+        "parsed": {
+          "safety": "safe",
+          "needs_review": 0.0995,
+          "action": "request_changes"
+        },
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 28.827300004195422,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"department\": {\"type\": \"choice\", \"choice\": \"billing\", \"probabilities\": {\"billing\": 0.9492, \"technical\": 0.0176, \"sales\": 0.0194, \"other\": 0.0138}, \"confidence\": 0.8151, \"action\": {\"act_probability\": 1.0}}, \"churn_risk\": {\"type\": \"noul\", \"noul\": 0.8724, \"confidence\": 0.8724, \"action\": {\"act_probability\": 1.0}}, \"is_phishing\": {\"type\": \"noul\", \"noul\": 0.0987, \"confidence\": 0.9013, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 246, \"output_tokens\": 0}}",
+        "parsed": {
+          "department": "billing",
+          "churn_risk": 0.8724,
+          "is_phishing": 0.0987
+        },
+        "correct_keys": 3,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 25.96679999260232,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"is_jailbreak\": {\"type\": \"noul\", \"noul\": 1.0, \"confidence\": 1.0, \"action\": {\"act_probability\": 1.0}}, \"is_injection\": {\"type\": \"noul\", \"noul\": 1.0, \"confidence\": 1.0, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 101, \"output_tokens\": 0}}",
+        "parsed": {
+          "is_jailbreak": 1.0,
+          "is_injection": 1.0
+        },
+        "correct_keys": 2,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 24.581800040323287,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"model\": {\"type\": \"choice\", \"choice\": \"light\", \"probabilities\": {\"light\": 0.7665, \"frontier\": 0.2335}, \"confidence\": 0.2159, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 54, \"output_tokens\": 0}}",
+        "parsed": {
+          "model": "light"
+        },
+        "correct_keys": 1,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 31.282799958717078,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"model\": {\"type\": \"choice\", \"choice\": \"frontier\", \"probabilities\": {\"light\": 0.2335, \"frontier\": 0.7665}, \"confidence\": 0.2159, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 75, \"output_tokens\": 0}}",
+        "parsed": {
+          "model": "frontier"
+        },
+        "correct_keys": 1,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 26.509199989959598,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"safety\": {\"type\": \"choice\", \"choice\": \"safe\", \"probabilities\": {\"safe\": 0.5331, \"risky\": 0.1702, \"unsafe\": 0.2967}, \"confidence\": 0.0923, \"action\": {\"act_probability\": 1.0}}, \"needs_review\": {\"type\": \"noul\", \"noul\": 0.068, \"confidence\": 0.932, \"action\": {\"act_probability\": 1.0}}, \"action\": {\"type\": \"choice\", \"choice\": \"request_changes\", \"probabilities\": {\"merge\": 0.2834, \"request_changes\": 0.432, \"escalate\": 0.2846}, \"confidence\": 0.0191, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 614, \"output_tokens\": 0}}",
+        "parsed": {
+          "safety": "safe",
+          "needs_review": 0.068,
+          "action": "request_changes"
+        },
+        "correct_keys": 2,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 28.256600024178624,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"safety\": {\"type\": \"choice\", \"choice\": \"safe\", \"probabilities\": {\"safe\": 0.7089, \"risky\": 0.1312, \"unsafe\": 0.1599}, \"confidence\": 0.2686, \"action\": {\"act_probability\": 1.0}}, \"needs_review\": {\"type\": \"noul\", \"noul\": 0.0995, \"confidence\": 0.9005, \"action\": {\"act_probability\": 1.0}}, \"action\": {\"type\": \"choice\", \"choice\": \"request_changes\", \"probabilities\": {\"merge\": 0.3681, \"request_changes\": 0.472, \"escalate\": 0.1598}, \"confidence\": 0.0758, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 428, \"output_tokens\": 0}}",
+        "parsed": {
+          "safety": "safe",
+          "needs_review": 0.0995,
+          "action": "request_changes"
+        },
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 29.890900012105703,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"department\": {\"type\": \"choice\", \"choice\": \"billing\", \"probabilities\": {\"billing\": 0.9492, \"technical\": 0.0176, \"sales\": 0.0194, \"other\": 0.0138}, \"confidence\": 0.8151, \"action\": {\"act_probability\": 1.0}}, \"churn_risk\": {\"type\": \"noul\", \"noul\": 0.8724, \"confidence\": 0.8724, \"action\": {\"act_probability\": 1.0}}, \"is_phishing\": {\"type\": \"noul\", \"noul\": 0.0987, \"confidence\": 0.9013, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 246, \"output_tokens\": 0}}",
+        "parsed": {
+          "department": "billing",
+          "churn_risk": 0.8724,
+          "is_phishing": 0.0987
+        },
+        "correct_keys": 3,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 27.553599968086928,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"is_jailbreak\": {\"type\": \"noul\", \"noul\": 1.0, \"confidence\": 1.0, \"action\": {\"act_probability\": 1.0}}, \"is_injection\": {\"type\": \"noul\", \"noul\": 1.0, \"confidence\": 1.0, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 101, \"output_tokens\": 0}}",
+        "parsed": {
+          "is_jailbreak": 1.0,
+          "is_injection": 1.0
+        },
+        "correct_keys": 2,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 23.97969999583438,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"model\": {\"type\": \"choice\", \"choice\": \"light\", \"probabilities\": {\"light\": 0.7665, \"frontier\": 0.2335}, \"confidence\": 0.2159, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 54, \"output_tokens\": 0}}",
+        "parsed": {
+          "model": "light"
+        },
+        "correct_keys": 1,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 24.769100011326373,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"model\": \"laya-rl-agent\", \"answers\": {\"model\": {\"type\": \"choice\", \"choice\": \"frontier\", \"probabilities\": {\"light\": 0.2335, \"frontier\": 0.7665}, \"confidence\": 0.2159, \"action\": {\"act_probability\": 1.0}}}, \"usage\": {\"input_tokens\": 75, \"output_tokens\": 0}}",
+        "parsed": {
+          "model": "frontier"
+        },
+        "correct_keys": 1,
+        "total_keys": 1
+      }
+    ]
+  },
+  "jev": {
+    "model": "jev-latest",
+    "avg_latency_ms": 42.99,
+    "avg_mem_delta_mb": 0.17,
+    "accuracy": 0.0,
+    "calls": [
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 50.86010001832619,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 1.453125,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 36.320899962447584,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.265625,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 47.84800001652911,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.25390625,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 35.43839999474585,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.25,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 39.97959999833256,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.26171875,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 34.77739996742457,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.265625,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 33.776699972804636,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.38671875,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 36.75959998508915,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.265625,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 55.6547999731265,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.25,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 55.292600009124726,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0078125,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 45.94209999777377,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 62.53699999069795,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.00390625,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 61.230799998156726,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 58.909400017000735,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.12890625,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 32.12320001330227,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.20703125,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 37.27009997237474,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.00390625,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 54.99319999944419,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.00390625,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 43.69379999116063,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.01171875,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 32.92440000222996,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.17578125,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 47.71850001998246,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.28125,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 35.39400000590831,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.3046875,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 36.97799996007234,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0078125,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 34.337099990807474,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 33.821199962403625,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 33.046600001398474,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 33.172399969771504,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 34.13879999425262,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 53.649699955713004,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 35.1523999706842,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.0234375,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 55.8300000266172,
+        "ttft_ms": null,
+        "tokens_per_sec": null,
+        "mem_delta_mb": 0.2265625,
+        "raw_output": "maximum recursion depth exceeded",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      }
+    ]
+  },
+  "ollama": {
+    "model": "gemma4:latest",
+    "avg_latency_ms": 3018.73,
+    "avg_mem_delta_mb": -0.0,
+    "accuracy": 0.3846,
+    "calls": [
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 3426.9433000008576,
+        "ttft_ms": 3426.9433000008576,
+        "tokens_per_sec": 152.54040795406704,
+        "mem_delta_mb": 0.00390625,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 3441.1225999938324,
+        "ttft_ms": 3441.1225999938324,
+        "tokens_per_sec": 151.15626988649674,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 2321.55849999981,
+        "ttft_ms": 2137.2166000073776,
+        "tokens_per_sec": 105.26315789473685,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"department\":\"billing\",\"churn_risk\":true,\"is_phishing\":false}",
+        "parsed": {
+          "department": "billing",
+          "churn_risk": true,
+          "is_phishing": false
+        },
+        "correct_keys": 3,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 2245.7348000025377,
+        "ttft_ms": 2103.933500009589,
+        "tokens_per_sec": 106.41014727164382,
+        "mem_delta_mb": -0.015625,
+        "raw_output": "{\"is_jailbreak\":true,\"is_injection\":true}",
+        "parsed": {
+          "is_jailbreak": true,
+          "is_injection": true
+        },
+        "correct_keys": 2,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 3394.266500021331,
+        "ttft_ms": 3394.266500021331,
+        "tokens_per_sec": 156.71709039049983,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 3386.259999999311,
+        "ttft_ms": 3386.259999999311,
+        "tokens_per_sec": 154.98721742924252,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 3406.4486999996006,
+        "ttft_ms": 3406.4486999996006,
+        "tokens_per_sec": 157.64615374914084,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 3391.2568999803625,
+        "ttft_ms": 3391.2568999803625,
+        "tokens_per_sec": 158.5289779081943,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 2357.4090999900363,
+        "ttft_ms": 2162.5138000235893,
+        "tokens_per_sec": 100.67718654952787,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"department\":\"billing\",\"churn_risk\":true,\"is_phishing\":false}",
+        "parsed": {
+          "department": "billing",
+          "churn_risk": true,
+          "is_phishing": false
+        },
+        "correct_keys": 3,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 2271.04760002112,
+        "ttft_ms": 2131.753999972716,
+        "tokens_per_sec": 111.67195247241703,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"is_jailbreak\":true,\"is_injection\":true}",
+        "parsed": {
+          "is_jailbreak": true,
+          "is_injection": true
+        },
+        "correct_keys": 2,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 3438.9762000064366,
+        "ttft_ms": 3438.9762000064366,
+        "tokens_per_sec": 152.7230520174715,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 3328.297999978531,
+        "ttft_ms": 3328.297999978531,
+        "tokens_per_sec": 163.2521126864033,
+        "mem_delta_mb": -0.0703125,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 3418.7188000069,
+        "ttft_ms": 3418.7188000069,
+        "tokens_per_sec": 156.85044310250177,
+        "mem_delta_mb": 0.00390625,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 3373.999100003857,
+        "ttft_ms": 3373.999100003857,
+        "tokens_per_sec": 159.95009557018213,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 2277.1980999968946,
+        "ttft_ms": 2152.89979998488,
+        "tokens_per_sec": 158.13697991660354,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"department\":\"billing\",\"churn_risk\":true,\"is_phishing\":false}",
+        "parsed": {
+          "department": "billing",
+          "churn_risk": true,
+          "is_phishing": false
+        },
+        "correct_keys": 3,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 2297.3527000285685,
+        "ttft_ms": 2151.42820001347,
+        "tokens_per_sec": 105.20557168707654,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"is_jailbreak\":true,\"is_injection\":true}",
+        "parsed": {
+          "is_jailbreak": true,
+          "is_injection": true
+        },
+        "correct_keys": 2,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 3387.73829996353,
+        "ttft_ms": 3387.73829996353,
+        "tokens_per_sec": 158.9825119236884,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 3328.8991000154056,
+        "ttft_ms": 3328.8991000154056,
+        "tokens_per_sec": 163.18231625875168,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 3372.5907999905758,
+        "ttft_ms": 3372.5907999905758,
+        "tokens_per_sec": 161.7891289030616,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 3480.2647000178695,
+        "ttft_ms": 3480.2647000178695,
+        "tokens_per_sec": 154.57145065306437,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 2237.695200019516,
+        "ttft_ms": 2115.358400042169,
+        "tokens_per_sec": 159.59680806383872,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"department\":\"billing\",\"churn_risk\":true,\"is_phishing\":false}",
+        "parsed": {
+          "department": "billing",
+          "churn_risk": true,
+          "is_phishing": false
+        },
+        "correct_keys": 3,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 2244.1223000059836,
+        "ttft_ms": 2101.6971999779344,
+        "tokens_per_sec": 105.7447603471248,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"is_jailbreak\":true,\"is_injection\":true}",
+        "parsed": {
+          "is_jailbreak": true,
+          "is_injection": true
+        },
+        "correct_keys": 2,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 3360.9417999978177,
+        "ttft_ms": 3360.9417999978177,
+        "tokens_per_sec": 160.63173247748745,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 3355.393900012132,
+        "ttft_ms": 3355.393900012132,
+        "tokens_per_sec": 163.41564851908655,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "auth_patch",
+        "latency_ms": 3357.2888000053354,
+        "ttft_ms": 3357.2888000053354,
+        "tokens_per_sec": 162.21915808256955,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "sql_injection",
+        "latency_ms": 3444.003699987661,
+        "ttft_ms": 3444.003699987661,
+        "tokens_per_sec": 154.93318893560124,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "billing_email",
+        "latency_ms": 2228.146600013133,
+        "ttft_ms": 2106.0112999984995,
+        "tokens_per_sec": 159.68936216706868,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"department\":\"billing\",\"churn_risk\":true,\"is_phishing\":false}",
+        "parsed": {
+          "department": "billing",
+          "churn_risk": true,
+          "is_phishing": false
+        },
+        "correct_keys": 3,
+        "total_keys": 3
+      },
+      {
+        "fixture_id": "jailbreak_prompt",
+        "latency_ms": 2252.5352999800816,
+        "ttft_ms": 2108.2411999814212,
+        "tokens_per_sec": 107.03887651995204,
+        "mem_delta_mb": 0.0,
+        "raw_output": "{\"is_jailbreak\":true,\"is_injection\":true}",
+        "parsed": {
+          "is_jailbreak": true,
+          "is_injection": true
+        },
+        "correct_keys": 2,
+        "total_keys": 2
+      },
+      {
+        "fixture_id": "simple_routing",
+        "latency_ms": 3362.9225000040606,
+        "ttft_ms": 3362.9225000040606,
+        "tokens_per_sec": 161.14749911167442,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      },
+      {
+        "fixture_id": "complex_routing",
+        "latency_ms": 3372.638900007587,
+        "ttft_ms": 3372.638900007587,
+        "tokens_per_sec": 162.174829331264,
+        "mem_delta_mb": 0.0,
+        "raw_output": "",
+        "parsed": {},
+        "correct_keys": 0,
+        "total_keys": 1
+      }
+    ],
+    "avg_ttft_ms": 2970.0,
+    "avg_tokens_per_sec": 146.23
+  }
+}

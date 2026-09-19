@@ -1,0 +1,1663 @@
+{
+  "meta": {
+    "date": "2026-09-19T04:16:20Z",
+    "suite": "laya-vs",
+    "fixtures": 51,
+    "untuned_id": "convaiinnovations/laya",
+    "tuned_id": "D:\\Projects\\AIDev\\laya\\laya-tuned\\checkpoints\\laya-sie"
+  },
+  "laya_untuned": {
+    "model": "Laya-untuned",
+    "overall": {
+      "correct": 13,
+      "total": 51,
+      "accuracy": 0.2549
+    },
+    "avg_latency_ms": 65.95,
+    "fixtures": [
+      {
+        "id": "sie_470",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 1948.08,
+        "error": null
+      },
+      {
+        "id": "sie_159",
+        "category": "sie",
+        "difficulty": "medium",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 55.09,
+        "error": null
+      },
+      {
+        "id": "sie_120",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 30.45,
+        "error": null
+      },
+      {
+        "id": "sie_43",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 24.4,
+        "error": null
+      },
+      {
+        "id": "sie_284",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.28,
+        "error": null
+      },
+      {
+        "id": "sie_436",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "D"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 24.65,
+        "error": null
+      },
+      {
+        "id": "sie_207",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.64,
+        "error": null
+      },
+      {
+        "id": "sie_108",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 27.08,
+        "error": null
+      },
+      {
+        "id": "sie_428",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 26.45,
+        "error": null
+      },
+      {
+        "id": "sie_166",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.33,
+        "error": null
+      },
+      {
+        "id": "sie_114",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.78,
+        "error": null
+      },
+      {
+        "id": "sie_317",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.36,
+        "error": null
+      },
+      {
+        "id": "sie_277",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 24.98,
+        "error": null
+      },
+      {
+        "id": "sie_86",
+        "category": "sie",
+        "difficulty": "easy",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.45,
+        "error": null
+      },
+      {
+        "id": "sie_264",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.51,
+        "error": null
+      },
+      {
+        "id": "sie_465",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 26.09,
+        "error": null
+      },
+      {
+        "id": "sie_99",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.71,
+        "error": null
+      },
+      {
+        "id": "sie_270",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.44,
+        "error": null
+      },
+      {
+        "id": "sie_219",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 32.41,
+        "error": null
+      },
+      {
+        "id": "sie_173",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 37.41,
+        "error": null
+      },
+      {
+        "id": "sie_421",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 39.16,
+        "error": null
+      },
+      {
+        "id": "sie_327",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 40.42,
+        "error": null
+      },
+      {
+        "id": "sie_254",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 30.0,
+        "error": null
+      },
+      {
+        "id": "sie_481",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "D"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 33.83,
+        "error": null
+      },
+      {
+        "id": "sie_433",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.63,
+        "error": null
+      },
+      {
+        "id": "sie_185",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.93,
+        "error": null
+      },
+      {
+        "id": "sie_397",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 26.07,
+        "error": null
+      },
+      {
+        "id": "sie_336",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 27.17,
+        "error": null
+      },
+      {
+        "id": "sie_291",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.88,
+        "error": null
+      },
+      {
+        "id": "sie_377",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.06,
+        "error": null
+      },
+      {
+        "id": "sie_415",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "D"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 27.67,
+        "error": null
+      },
+      {
+        "id": "sie_44",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 27.13,
+        "error": null
+      },
+      {
+        "id": "sie_472",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 26.61,
+        "error": null
+      },
+      {
+        "id": "sie_88",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 29.89,
+        "error": null
+      },
+      {
+        "id": "sie_46",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 27.18,
+        "error": null
+      },
+      {
+        "id": "sie_58",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.68,
+        "error": null
+      },
+      {
+        "id": "sie_85",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 28.72,
+        "error": null
+      },
+      {
+        "id": "sie_410",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 28.33,
+        "error": null
+      },
+      {
+        "id": "sie_8",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.95,
+        "error": null
+      },
+      {
+        "id": "sie_79",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 27.32,
+        "error": null
+      },
+      {
+        "id": "sie_91",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.61,
+        "error": null
+      },
+      {
+        "id": "sie_313",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 31.56,
+        "error": null
+      },
+      {
+        "id": "sie_276",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "D"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.43,
+        "error": null
+      },
+      {
+        "id": "sie_325",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 27.2,
+        "error": null
+      },
+      {
+        "id": "sie_230",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 27.48,
+        "error": null
+      },
+      {
+        "id": "sie_455",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.07,
+        "error": null
+      },
+      {
+        "id": "sie_407",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.95,
+        "error": null
+      },
+      {
+        "id": "sie_304",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.59,
+        "error": null
+      },
+      {
+        "id": "sie_496",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.07,
+        "error": null
+      },
+      {
+        "id": "sie_202",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 27.57,
+        "error": null
+      },
+      {
+        "id": "sie_204",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.94,
+        "error": null
+      }
+    ]
+  },
+  "laya_tuned": {
+    "model": "Laya-tuned",
+    "overall": {
+      "correct": 31,
+      "total": 51,
+      "accuracy": 0.6078
+    },
+    "avg_latency_ms": 25.91,
+    "fixtures": [
+      {
+        "id": "sie_470",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 34.17,
+        "error": null
+      },
+      {
+        "id": "sie_159",
+        "category": "sie",
+        "difficulty": "medium",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.12,
+        "error": null
+      },
+      {
+        "id": "sie_120",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "D"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.43,
+        "error": null
+      },
+      {
+        "id": "sie_43",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.57,
+        "error": null
+      },
+      {
+        "id": "sie_284",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 24.49,
+        "error": null
+      },
+      {
+        "id": "sie_436",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "D"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.28,
+        "error": null
+      },
+      {
+        "id": "sie_207",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.43,
+        "error": null
+      },
+      {
+        "id": "sie_108",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.53,
+        "error": null
+      },
+      {
+        "id": "sie_428",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 24.23,
+        "error": null
+      },
+      {
+        "id": "sie_166",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 26.04,
+        "error": null
+      },
+      {
+        "id": "sie_114",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 24.49,
+        "error": null
+      },
+      {
+        "id": "sie_317",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.21,
+        "error": null
+      },
+      {
+        "id": "sie_277",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 24.66,
+        "error": null
+      },
+      {
+        "id": "sie_86",
+        "category": "sie",
+        "difficulty": "easy",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 26.05,
+        "error": null
+      },
+      {
+        "id": "sie_264",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 24.94,
+        "error": null
+      },
+      {
+        "id": "sie_465",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.34,
+        "error": null
+      },
+      {
+        "id": "sie_99",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 24.91,
+        "error": null
+      },
+      {
+        "id": "sie_270",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.38,
+        "error": null
+      },
+      {
+        "id": "sie_219",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.19,
+        "error": null
+      },
+      {
+        "id": "sie_173",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.4,
+        "error": null
+      },
+      {
+        "id": "sie_421",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.34,
+        "error": null
+      },
+      {
+        "id": "sie_327",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 26.05,
+        "error": null
+      },
+      {
+        "id": "sie_254",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 24.88,
+        "error": null
+      },
+      {
+        "id": "sie_481",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.18,
+        "error": null
+      },
+      {
+        "id": "sie_433",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 24.86,
+        "error": null
+      },
+      {
+        "id": "sie_185",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.78,
+        "error": null
+      },
+      {
+        "id": "sie_397",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 26.1,
+        "error": null
+      },
+      {
+        "id": "sie_336",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 23.54,
+        "error": null
+      },
+      {
+        "id": "sie_291",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 24.98,
+        "error": null
+      },
+      {
+        "id": "sie_377",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.73,
+        "error": null
+      },
+      {
+        "id": "sie_415",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "D"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.56,
+        "error": null
+      },
+      {
+        "id": "sie_44",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.32,
+        "error": null
+      },
+      {
+        "id": "sie_472",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 24.69,
+        "error": null
+      },
+      {
+        "id": "sie_88",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.69,
+        "error": null
+      },
+      {
+        "id": "sie_46",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.44,
+        "error": null
+      },
+      {
+        "id": "sie_58",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 24.63,
+        "error": null
+      },
+      {
+        "id": "sie_85",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 24.76,
+        "error": null
+      },
+      {
+        "id": "sie_410",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 24.61,
+        "error": null
+      },
+      {
+        "id": "sie_8",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.05,
+        "error": null
+      },
+      {
+        "id": "sie_79",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 24.73,
+        "error": null
+      },
+      {
+        "id": "sie_91",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.95,
+        "error": null
+      },
+      {
+        "id": "sie_313",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 26.04,
+        "error": null
+      },
+      {
+        "id": "sie_276",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 26.18,
+        "error": null
+      },
+      {
+        "id": "sie_325",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 25.17,
+        "error": null
+      },
+      {
+        "id": "sie_230",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "A"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 31.72,
+        "error": null
+      },
+      {
+        "id": "sie_455",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 36.49,
+        "error": null
+      },
+      {
+        "id": "sie_407",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 29.32,
+        "error": null
+      },
+      {
+        "id": "sie_304",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "D"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 25.18,
+        "error": null
+      },
+      {
+        "id": "sie_496",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "C"
+        },
+        "predicted": {
+          "answer": "C"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 24.54,
+        "error": null
+      },
+      {
+        "id": "sie_202",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "A"
+        },
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0,
+        "latency_ms": 24.71,
+        "error": null
+      },
+      {
+        "id": "sie_204",
+        "category": "sie",
+        "difficulty": "hard",
+        "ground_truth": {
+          "answer": "B"
+        },
+        "predicted": {
+          "answer": "B"
+        },
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0,
+        "latency_ms": 26.54,
+        "error": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "laya",
+  "version": "0.1.0",
+  "description": "Laya MCP and skill for fixed-shape decisions: labels, boolean probabilities, and ordinal scores.",
+  "mcpServers": {
+    "laya": {
+      "command": "laya-mcp",
+      "env": {
+        "LAYA_MODEL_ID": "convaiinnovations/laya",
+        "LAYA_MAX_STATE_TOKENS": "512",
+        "LAYA_CONFIDENCE_THRESHOLD": "0.85"
+      }
+    }
+  }
+}

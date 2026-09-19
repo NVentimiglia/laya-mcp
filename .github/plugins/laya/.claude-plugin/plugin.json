@@ -1,0 +1,21 @@
+{
+  "name": "laya",
+  "description": "Laya MCP and skill for fixed-shape decisions: labels, boolean probabilities, and ordinal scores. Use for routing, classification, guardrails, and PR triage.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Nicholas Ventimiglia",
+    "url": "https://github.com/NVentimiglia"
+  },
+  "homepage": "https://github.com/NVentimiglia/laya-mcp",
+  "repository": "https://github.com/NVentimiglia/laya-mcp",
+  "license": "MIT",
+  "keywords": [
+    "laya",
+    "mcp",
+    "decision",
+    "guardrails",
+    "routing"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

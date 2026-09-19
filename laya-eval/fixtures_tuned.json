@@ -1,0 +1,414 @@
+[
+  {
+    "id": "med_chest_pain_stemi",
+    "category": "medical_triage",
+    "difficulty": "hard",
+    "description": "Acute chest pain with radiation, diaphoresis, and unstable vitals.",
+    "input": {
+      "note": "Patient presents with acute chest pain radiating to left arm, diaphoresis.",
+      "vitals": "BP 160/95, HR 112, SpO2 94%"
+    },
+    "questions": {
+      "acuity": {
+        "type": "choice",
+        "instructions": "What is the triage acuity level?",
+        "criteria": {
+          "immediate": "Life-threatening, requires intervention within minutes.",
+          "urgent": "Serious, stable for up to 30 minutes.",
+          "less_urgent": "Can safely wait 1-2 hours.",
+          "non_urgent": "Minor complaint, can wait several hours."
+        }
+      },
+      "needs_ecg": {
+        "type": "noul",
+        "instructions": "Does this patient require an immediate ECG?"
+      }
+    },
+    "ground_truth": {
+      "acuity": "immediate",
+      "needs_ecg": true
+    }
+  },
+  {
+    "id": "med_ankle_sprain",
+    "category": "medical_triage",
+    "difficulty": "easy",
+    "description": "Isolated ankle sprain after sports, stable vitals, walking with limp.",
+    "input": {
+      "note": "22-year-old twisted ankle playing soccer. Able to bear weight with a limp. No head injury.",
+      "vitals": "BP 118/72, HR 78, SpO2 99%"
+    },
+    "questions": {
+      "acuity": {
+        "type": "choice",
+        "instructions": "What is the triage acuity level?",
+        "criteria": {
+          "immediate": "Life-threatening, requires intervention within minutes.",
+          "urgent": "Serious, stable for up to 30 minutes.",
+          "less_urgent": "Can safely wait 1-2 hours.",
+          "non_urgent": "Minor complaint, can wait several hours."
+        }
+      },
+      "needs_ecg": {
+        "type": "noul",
+        "instructions": "Does this patient require an immediate ECG?"
+      }
+    },
+    "ground_truth": {
+      "acuity": "less_urgent",
+      "needs_ecg": false
+    }
+  },
+  {
+    "id": "med_infant_fever",
+    "category": "medical_triage",
+    "difficulty": "medium",
+    "description": "Six-week-old with fever 38.5 C, lethargic, poor feeding.",
+    "input": {
+      "note": "6-week-old infant, fever 38.5 C, lethargic, fewer wet diapers, poor feeding for 12 hours.",
+      "vitals": "HR 168, RR 52, SpO2 97%, temp 38.5 C"
+    },
+    "questions": {
+      "acuity": {
+        "type": "choice",
+        "instructions": "What is the triage acuity level?",
+        "criteria": {
+          "immediate": "Life-threatening, requires intervention within minutes.",
+          "urgent": "Serious, stable for up to 30 minutes.",
+          "less_urgent": "Can safely wait 1-2 hours.",
+          "non_urgent": "Minor complaint, can wait several hours."
+        }
+      },
+      "needs_ecg": {
+        "type": "noul",
+        "instructions": "Does this patient require an immediate ECG?"
+      }
+    },
+    "ground_truth": {
+      "acuity": "urgent",
+      "needs_ecg": false
+    }
+  },
+  {
+    "id": "med_rx_refill",
+    "category": "medical_triage",
+    "difficulty": "easy",
+    "description": "Adult requesting a routine blood-pressure medication refill, no new symptoms.",
+    "input": {
+      "note": "54-year-old here for a lisinopril refill. No chest pain, no shortness of breath, no new complaints.",
+      "vitals": "BP 128/80, HR 70, SpO2 99%"
+    },
+    "questions": {
+      "acuity": {
+        "type": "choice",
+        "instructions": "What is the triage acuity level?",
+        "criteria": {
+          "immediate": "Life-threatening, requires intervention within minutes.",
+          "urgent": "Serious, stable for up to 30 minutes.",
+          "less_urgent": "Can safely wait 1-2 hours.",
+          "non_urgent": "Minor complaint, can wait several hours."
+        }
+      },
+      "needs_ecg": {
+        "type": "noul",
+        "instructions": "Does this patient require an immediate ECG?"
+      }
+    },
+    "ground_truth": {
+      "acuity": "non_urgent",
+      "needs_ecg": false
+    }
+  },
+  {
+    "id": "legal_attorney_client",
+    "category": "legal_review",
+    "difficulty": "medium",
+    "description": "Email from outside counsel discussing settlement strategy for an active case.",
+    "input": {
+      "document_type": "email",
+      "text": "From: jane.lee@outside-counsel.example\nTo: gc@acme.example\nSubject: Acme v. Northwind settlement\nThis is privileged. Do not produce. We should offer $400k and keep the indemnity clause off the table."
+    },
+    "questions": {
+      "is_privileged": {
+        "type": "noul",
+        "instructions": "Is this attorney-client privileged or work product that must not be produced?"
+      },
+      "risk": {
+        "type": "choice",
+        "instructions": "How high is the disclosure or contractual risk if this is mishandled?",
+        "criteria": {
+          "low": "Public or routine language with no privilege or liability issue.",
+          "medium": "Some sensitive content; needs counsel review before sharing.",
+          "high": "Privilege, unlimited liability, or regulatory exposure if disclosed or signed as-is."
+        }
+      },
+      "action": {
+        "type": "choice",
+        "instructions": "What should the reviewer do?",
+        "criteria": {
+          "proceed": "Safe to use or share as written.",
+          "review": "Hold for counsel review before any external sharing.",
+          "escalate": "Stop. Privilege, unlimited liability, or regulatory issue."
+        }
+      }
+    },
+    "ground_truth": {
+      "is_privileged": true,
+      "risk": "high",
+      "action": "escalate"
+    }
+  },
+  {
+    "id": "legal_public_docket",
+    "category": "legal_review",
+    "difficulty": "easy",
+    "description": "Public civil docket entry already filed with the court.",
+    "input": {
+      "document_type": "court_docket",
+      "text": "UNITED STATES DISTRICT COURT. Case 1:24-cv-01001. Complaint filed 2024-03-12. Plaintiff Acme Corp. vs Defendant Northwind LLC. Public docket, no seal."
+    },
+    "questions": {
+      "is_privileged": {
+        "type": "noul",
+        "instructions": "Is this attorney-client privileged or work product that must not be produced?"
+      },
+      "risk": {
+        "type": "choice",
+        "instructions": "How high is the disclosure or contractual risk if this is mishandled?",
+        "criteria": {
+          "low": "Public or routine language with no privilege or liability issue.",
+          "medium": "Some sensitive content; needs counsel review before sharing.",
+          "high": "Privilege, unlimited liability, or regulatory exposure if disclosed or signed as-is."
+        }
+      },
+      "action": {
+        "type": "choice",
+        "instructions": "What should the reviewer do?",
+        "criteria": {
+          "proceed": "Safe to use or share as written.",
+          "review": "Hold for counsel review before any external sharing.",
+          "escalate": "Stop. Privilege, unlimited liability, or regulatory issue."
+        }
+      }
+    },
+    "ground_truth": {
+      "is_privileged": false,
+      "risk": "low",
+      "action": "proceed"
+    }
+  },
+  {
+    "id": "legal_indemnity_unlimited",
+    "category": "legal_review",
+    "difficulty": "hard",
+    "description": "Vendor paper with uncapped indemnity and a waiver of consequential-damage caps.",
+    "input": {
+      "document_type": "vendor_msa",
+      "text": "Vendor shall indemnify Customer for all claims, without limitation of amount, including lost profits and consequential damages. Customer waives any liability cap. Governing law: vendor's home state."
+    },
+    "questions": {
+      "is_privileged": {
+        "type": "noul",
+        "instructions": "Is this attorney-client privileged or work product that must not be produced?"
+      },
+      "risk": {
+        "type": "choice",
+        "instructions": "How high is the disclosure or contractual risk if this is mishandled?",
+        "criteria": {
+          "low": "Public or routine language with no privilege or liability issue.",
+          "medium": "Some sensitive content; needs counsel review before sharing.",
+          "high": "Privilege, unlimited liability, or regulatory exposure if disclosed or signed as-is."
+        }
+      },
+      "action": {
+        "type": "choice",
+        "instructions": "What should the reviewer do?",
+        "criteria": {
+          "proceed": "Safe to use or share as written.",
+          "review": "Hold for counsel review before any external sharing.",
+          "escalate": "Stop. Privilege, unlimited liability, or regulatory issue."
+        }
+      }
+    },
+    "ground_truth": {
+      "is_privileged": false,
+      "risk": "high",
+      "action": "escalate"
+    }
+  },
+  {
+    "id": "legal_nda_standard",
+    "category": "legal_review",
+    "difficulty": "medium",
+    "description": "Mutual NDA with a 2-year term and a $1M cap, no unusual clauses.",
+    "input": {
+      "document_type": "nda",
+      "text": "Mutual NDA. Term 24 months. Confidentiality excludes public information. Liability cap $1,000,000. No unlimited indemnity. Either party may terminate on 30 days notice."
+    },
+    "questions": {
+      "is_privileged": {
+        "type": "noul",
+        "instructions": "Is this attorney-client privileged or work product that must not be produced?"
+      },
+      "risk": {
+        "type": "choice",
+        "instructions": "How high is the disclosure or contractual risk if this is mishandled?",
+        "criteria": {
+          "low": "Public or routine language with no privilege or liability issue.",
+          "medium": "Some sensitive content; needs counsel review before sharing.",
+          "high": "Privilege, unlimited liability, or regulatory exposure if disclosed or signed as-is."
+        }
+      },
+      "action": {
+        "type": "choice",
+        "instructions": "What should the reviewer do?",
+        "criteria": {
+          "proceed": "Safe to use or share as written.",
+          "review": "Hold for counsel review before any external sharing.",
+          "escalate": "Stop. Privilege, unlimited liability, or regulatory issue."
+        }
+      }
+    },
+    "ground_truth": {
+      "is_privileged": false,
+      "risk": "medium",
+      "action": "review"
+    }
+  },
+  {
+    "id": "credit_clean_approve",
+    "category": "credit_ops",
+    "difficulty": "easy",
+    "description": "Prime applicant, long history, low utilization, no fraud flags.",
+    "input": {
+      "applicant": "Maya Chen",
+      "fico": 781,
+      "utilization": 0.12,
+      "history_months": 96,
+      "income_verified": true,
+      "fraud_signals": []
+    },
+    "questions": {
+      "credit_decision": {
+        "type": "choice",
+        "instructions": "Approve, refer to a human underwriter, or decline.",
+        "criteria": {
+          "approve": "Prime file, verified income, no fraud or policy exceptions.",
+          "refer": "Borderline score, thin file, or a policy exception that needs a person.",
+          "decline": "Below cutoff, unverifiable income, or confirmed fraud."
+        }
+      },
+      "fraud_risk": {
+        "type": "noul",
+        "instructions": "Is there a material fraud or identity-theft signal?"
+      }
+    },
+    "ground_truth": {
+      "credit_decision": "approve",
+      "fraud_risk": false
+    }
+  },
+  {
+    "id": "credit_thin_file_refer",
+    "category": "credit_ops",
+    "difficulty": "medium",
+    "description": "New-to-credit applicant with verified income but only 4 months of history.",
+    "input": {
+      "applicant": "Omar Haddad",
+      "fico": 680,
+      "utilization": 0.22,
+      "history_months": 4,
+      "income_verified": true,
+      "fraud_signals": []
+    },
+    "questions": {
+      "credit_decision": {
+        "type": "choice",
+        "instructions": "Approve, refer to a human underwriter, or decline.",
+        "criteria": {
+          "approve": "Prime file, verified income, no fraud or policy exceptions.",
+          "refer": "Borderline score, thin file, or a policy exception that needs a person.",
+          "decline": "Below cutoff, unverifiable income, or confirmed fraud."
+        }
+      },
+      "fraud_risk": {
+        "type": "noul",
+        "instructions": "Is there a material fraud or identity-theft signal?"
+      }
+    },
+    "ground_truth": {
+      "credit_decision": "refer",
+      "fraud_risk": false
+    }
+  },
+  {
+    "id": "credit_fraud_decline",
+    "category": "credit_ops",
+    "difficulty": "hard",
+    "description": "Application with a mismatched SSN, velocity spike, and a known mule address.",
+    "input": {
+      "applicant": "Alex Rivera",
+      "fico": 720,
+      "utilization": 0.18,
+      "history_months": 40,
+      "income_verified": false,
+      "fraud_signals": [
+        "ssn_mismatch",
+        "device_velocity_24h",
+        "known_mule_address"
+      ]
+    },
+    "questions": {
+      "credit_decision": {
+        "type": "choice",
+        "instructions": "Approve, refer to a human underwriter, or decline.",
+        "criteria": {
+          "approve": "Prime file, verified income, no fraud or policy exceptions.",
+          "refer": "Borderline score, thin file, or a policy exception that needs a person.",
+          "decline": "Below cutoff, unverifiable income, or confirmed fraud."
+        }
+      },
+      "fraud_risk": {
+        "type": "noul",
+        "instructions": "Is there a material fraud or identity-theft signal?"
+      }
+    },
+    "ground_truth": {
+      "credit_decision": "decline",
+      "fraud_risk": true
+    }
+  },
+  {
+    "id": "credit_borderline_refer",
+    "category": "credit_ops",
+    "difficulty": "medium",
+    "description": "Near-cutoff score, high utilization, income verified, no fraud.",
+    "input": {
+      "applicant": "Priya Shah",
+      "fico": 662,
+      "utilization": 0.71,
+      "history_months": 36,
+      "income_verified": true,
+      "fraud_signals": []
+    },
+    "questions": {
+      "credit_decision": {
+        "type": "choice",
+        "instructions": "Approve, refer to a human underwriter, or decline.",
+        "criteria": {
+          "approve": "Prime file, verified income, no fraud or policy exceptions.",
+          "refer": "Borderline score, thin file, or a policy exception that needs a person.",
+          "decline": "Below cutoff, unverifiable income, or confirmed fraud."
+        }
+      },
+      "fraud_risk": {
+        "type": "noul",
+        "instructions": "Is there a material fraud or identity-theft signal?"
+      }
+    },
+    "ground_truth": {
+      "credit_decision": "refer",
+      "fraud_risk": false
+    }
+  }
+]

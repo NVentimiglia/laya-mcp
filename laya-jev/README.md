@@ -12,6 +12,11 @@ jev.key          → apikey_...
 laya-jev/.env    → TYPESAFE_API_KEY=apikey_...
 ```
 
+Key order: `TYPESAFE_API_KEY` in the shell, then `jev.key`, then
+`.env`. If Jev rejects the key in use (401 or 403), the client
+retries once with `jev.key`, so a stale shell or `.env` key cannot
+block a run.
+
 ```powershell
 pip install -e laya-jev/
 python laya-eval/eval_laya.py --compare

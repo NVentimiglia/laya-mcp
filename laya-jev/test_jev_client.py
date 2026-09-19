@@ -117,3 +117,47 @@ def test_jev_key_file_does_not_override_env(monkeypatch):
     monkeypatch.setenv("TYPESAFE_API_KEY", "already-set")
     _apply_typesafe_key("apikey_from_file")
     assert os.environ["TYPESAFE_API_KEY"] == "already-set"
+
+
+class _FakeTypeSafe:
+    """Rejects every key except the one named good."""
+
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.closed = False
+
+    def system_one(self, state, questions):
+        from typesafe_sdk import TypeSafeAuthenticationError
+
+        if self.api_key != "good":
+            raise TypeSafeAuthenticationError.__new__(TypeSafeAuthenticationError)
+        return {"answers": {"q": {"type": "noul", "noul": 0.9}}}
+
+    def close(self):
+        self.closed = True
+
+
+def _fake_client(monkeypatch, key_file):
+    import jev_client
+
+    monkeypatch.setattr(jev_client.JevClient, "_connect", lambda self, k: _FakeTypeSafe(k))
+    monkeypatch.setattr(jev_client, "jev_key_file", lambda: key_file)
+    return jev_client.JevClient(api_key="stale")
+
+
+NOUL_Q = {"q": {"type": "noul", "instructions": "?"}}
+
+
+def test_auth_failure_falls_back_to_jev_key(monkeypatch):
+    client = _fake_client(monkeypatch, "good")
+    out = client.predict({"x": 1}, NOUL_Q)
+    assert out["answers"]["q"]["noul"] == 0.9
+    assert client._api_key == "good"
+
+
+def test_auth_failure_reraises_without_other_key(monkeypatch):
+    from typesafe_sdk import TypeSafeAuthenticationError
+
+    client = _fake_client(monkeypatch, "stale")
+    with pytest.raises(TypeSafeAuthenticationError):
+        client.predict({"x": 1}, NOUL_Q)

@@ -65,3 +65,58 @@ def test_tuned_fixtures_schema_and_disjoint():
         assert isinstance(fx.get("questions"), dict) and fx["questions"]
         assert isinstance(fx.get("ground_truth"), dict) and fx["ground_truth"]
         assert "input" in fx
+
+
+def test_score_string_false_is_false():
+    # bool("false") is True; the scorer must not use bool() on strings.
+    from eval_laya import _score_answer
+    assert _score_answer("false", False) is True
+    assert _score_answer("false", True) is False
+    assert _score_answer("true", True) is True
+
+
+def test_score_label_is_not_boolean():
+    from eval_laya import _score_answer
+    assert _score_answer("safe", True) is False
+    assert _score_answer("safe", False) is False
+
+
+def test_score_noul_probability():
+    from eval_laya import _score_answer
+    assert _score_answer(0.9, True) is True
+    assert _score_answer(0.1, False) is True
+    assert _score_answer(0.1, "true") is False
+
+
+def test_score_label_case_and_space():
+    from eval_laya import _score_answer
+    assert _score_answer(" Light ", "light") is True
+
+
+def test_ollama_decision_prompt_lists_labels():
+    from eval_laya import _ollama_prompt_decision
+    fx = {
+        "input": {"request": "What is 2 + 2?"},
+        "questions": {
+            "tier": {
+                "type": "choice",
+                "instructions": "Pick a tier.",
+                "criteria": {"light": "Simple.", "frontier": "Hard."},
+            },
+            "urgent": {"type": "boolean", "instructions": "Urgent?"},
+        },
+        "ground_truth": {"tier": "light", "urgent": False},
+    }
+    prompt = _ollama_prompt_decision(fx)
+    assert '"tier": "light|frontier"' in prompt
+    assert '"urgent": true|false' in prompt
+    assert "light: Simple." in prompt
+
+
+def test_empty_category_filter_fails(tmp_path):
+    from eval_laya import run_eval
+    fixtures = tmp_path / "fx.json"
+    fixtures.write_text(json.dumps([{"id": "a", "category": "math"}]), encoding="utf-8")
+    rc = run_eval(fixtures, tmp_path / "out.json", False, False, False,
+                  "m", "j", "no_such_category")
+    assert rc == 1

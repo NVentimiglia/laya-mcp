@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import copy
 import os
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -23,23 +24,41 @@ _QUESTION_KEYS = ("type", "instructions", "criteria")
 _ENV_NAMES = ("TYPESAFE_API_KEY", "TYPESAFE_DEFAULT_MODEL")
 
 
+_HERE = Path(__file__).resolve().parent
+_KEY_FILES = (_HERE.parent / "jev.key", _HERE / "jev.key")
+
+
+def _parse_key(raw: str) -> str | None:
+    """First line of a key file: a bare key or TYPESAFE_API_KEY=..."""
+    line = raw.strip().splitlines()[0].strip() if raw.strip() else ""
+    if not line or line.startswith("#"):
+        return None
+    if line.upper().startswith("TYPESAFE_API_KEY="):
+        line = line.split("=", 1)[1].strip().strip('"').strip("'")
+    return line or None
+
+
 def _apply_typesafe_key(raw: str) -> None:
     if os.environ.get("TYPESAFE_API_KEY", "").strip():
         return
-    line = raw.strip().splitlines()[0].strip() if raw.strip() else ""
-    if not line or line.startswith("#"):
-        return
-    if line.upper().startswith("TYPESAFE_API_KEY="):
-        line = line.split("=", 1)[1].strip().strip('"').strip("'")
-    if line:
-        os.environ["TYPESAFE_API_KEY"] = line
+    key = _parse_key(raw)
+    if key:
+        os.environ["TYPESAFE_API_KEY"] = key
+
+
+def jev_key_file() -> str | None:
+    """Key from repo-root or laya-jev jev.key, or None."""
+    for key_path in _KEY_FILES:
+        if key_path.is_file():
+            return _parse_key(key_path.read_text(encoding="utf-8"))
+    return None
 
 
 def _load_env_files() -> None:
     """Fill missing TypeSafe vars from jev.key, laya-jev/.env, or repo .env."""
-    here = Path(__file__).resolve().parent
+    here = _HERE
     root = here.parent
-    for key_path in (root / "jev.key", here / "jev.key"):
+    for key_path in _KEY_FILES:
         if key_path.is_file():
             _apply_typesafe_key(key_path.read_text(encoding="utf-8"))
             break
@@ -157,24 +176,50 @@ class JevClient:
         api_key: str | None = None,
         model: str = DEFAULT_MODEL,
     ) -> None:
+        self.model = model
+        self._api_key = api_key or os.environ.get("TYPESAFE_API_KEY", "").strip() or None
+        self._client = self._connect(self._api_key)
+
+    def _connect(self, api_key: str | None) -> Any:
         from typesafe_sdk import TypeSafeClient  # noqa: PLC0415
 
-        self.model = model
-        self._client = TypeSafeClient(
+        return TypeSafeClient(
             api_key=api_key,
-            model=model,
+            model=self.model,
             http_client=_make_http_client(),
         )
+
+    def _switch_to_key_file(self) -> bool:
+        """Reconnect with the jev.key key when it differs from the one in use."""
+        key = jev_key_file()
+        if not key or key == self._api_key:
+            return False
+        print("Jev rejected the API key; retrying with jev.key.", file=sys.stderr, flush=True)
+        self._client.close()
+        self._api_key = key
+        self._client = self._connect(key)
+        return True
 
     def predict(
         self,
         state: Any,
         questions: dict[str, Any],
     ) -> dict[str, Any]:
+        from typesafe_sdk import (  # noqa: PLC0415
+            TypeSafeAuthenticationError,
+            TypeSafePermissionDeniedError,
+        )
+
         if state is None:
             raise ValueError("Jev state cannot be None")
         normalized = normalize_questions(questions)
-        result = self._client.system_one(state=state, questions=normalized)
+        try:
+            result = self._client.system_one(state=state, questions=normalized)
+        except (TypeSafeAuthenticationError, TypeSafePermissionDeniedError):
+            # A stale env or .env key can shadow jev.key; fall back to it once.
+            if not self._switch_to_key_file():
+                raise
+            result = self._client.system_one(state=state, questions=normalized)
         return flatten_answers(result)
 
     def close(self) -> None:

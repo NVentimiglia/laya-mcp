@@ -77,3 +77,12 @@ def test_poison_stems_reads_finance_sie_only(tmp_path: Path):
     stems = poison_stems(path)
     assert "which order type is a market order?" in stems
     assert len(stems) == 1
+
+
+def test_stem_keeps_inline_letter_paren():
+    text = SAMPLE.replace(
+        "What is a common stock?", "Under Rule 15c3-3 (Appendix A) which is true?"
+    )
+    row = parse_sie_markdown(text)
+    assert row is not None
+    assert row["stem"] == "Under Rule 15c3-3 (Appendix A) which is true?"

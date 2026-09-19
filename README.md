@@ -29,7 +29,7 @@ python laya-mcp/smoke_test.py
 | Variable | Default | Role |
 |---|---|---|
 | `LAYA_MODEL_ID` | `convaiinnovations/laya` | HuggingFace model |
-| `LAYA_MAX_STATE_TOKENS` | `512` | Max tokens in state |
+| `LAYA_MAX_STATE_TOKENS` | `512` | Upper cap on state tokens |
 | `LAYA_CONFIDENCE_THRESHOLD` | `0.85` | Automate vs escalate |
 
 ### GPU on RTX 50-series
@@ -77,6 +77,12 @@ of three shapes: `choice` (label + confidence + probabilities),
 ordinal rubric). You can add questions to the same call without extra
 latency because they share one forward pass.
 
+Laya reads 512 tokens in total, and the question and its options use
+part of that. The server counts state tokens with Laya's tokenizer
+and rejects state that would not fit. The router questions leave
+room for about 400 tokens, so send `evaluate_pr_diff` one file or
+hunk at a time. Errors come back as MCP results with `isError: true`.
+
 ## Patterns
 
 **Guardrail.** Call `check_guardrails` before each tool run. Block if
@@ -95,20 +101,23 @@ the `action` choice.
 
 Public weights (`convaiinnovations/laya`). 64
 fixtures, 80 scored keys. Jev is TypeSafe System One (`jev-latest`).
-Ollama is `gemma4:latest`.
+Ollama is `gemma4:latest` with thinking off.
 
 | Metric | Laya | Jev | Ollama |
 |---|---|---|---|
-| Key accuracy | 32.5% (26/80) | 97.5% (78/80) | 10.0% (8/80) |
-| Median latency | 28 ms | 131 ms | 2,905 ms |
+| Key accuracy | 32.5% (26/80) | 98.8% (79/80) | 88.8% (71/80) |
+| Median latency | 26 ms | 138 ms | 2,193 ms |
 
-Laya is strong on structured decisions (moderation 4/4, guardrails
-7/9) and weak on multiple-choice knowledge items (8/50). Full tables
-are in [EVAL_RESULTS_UNTUNE.md](EVAL_RESULTS_UNTUNE.md).
+Laya is about 5x faster than Jev and 80x faster than Ollama, and the
+least accurate. It does well on moderation (4/4) and guardrails
+(7/9) and poorly on multiple-choice knowledge items (8/50; it
+answers A on 46 of 50). Use it for fast screens and routing, and
+escalate low-confidence results. Full tables are in
+[EVAL_RESULTS_UNTUNE.md](EVAL_RESULTS_UNTUNE.md).
 
 An SIE fine-tune on 51 holdout items from
 [Quant Green Book](https://quantgreenbook.com) moves Laya from 25.5%
-(13/51) to 60.8% (31/51). Guide: [FINE_TUNE.md](FINE_TUNE.md).
+(13/51) to 58.8% (30/51). Guide: [FINE_TUNE.md](FINE_TUNE.md).
 Numbers: [EVAL_RESULTS_TUNED.md](EVAL_RESULTS_TUNED.md).
 
 ## Eval
@@ -119,8 +128,10 @@ python laya-eval/eval_laya.py
 ```
 
 Add `--compare` to score Laya, Jev, and Ollama on the same fixtures.
-Jev needs `TYPESAFE_API_KEY`. Score latency with 6 fixtures and 5
-passes each:
+Jev needs `TYPESAFE_API_KEY` or a `jev.key` file at the repo root; see
+[laya-jev/README.md](laya-jev/README.md). The run exits 1 when any
+category is below 80% or `--category` matches nothing. Score latency
+with 6 fixtures and 5 passes each:
 
 ```powershell
 ollama pull gemma4:latest

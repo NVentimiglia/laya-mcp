@@ -25,6 +25,7 @@ TUNED_ID = HERE / "checkpoints" / "laya-sie"
 sys.path.insert(0, str(EVAL_DIR))
 
 from eval_laya import (  # noqa: E402
+    PASS_THRESHOLD,
     EngineStats,
     _categories_passed,
     _extract_laya_answers,
@@ -38,14 +39,21 @@ def _load_agent(model_id: str) -> Any:
     path = Path(model_id)
     if path.exists():
         model_id = str(path.resolve())
-    elif "/" in model_id.replace("\\", "/") and model_id.count("/") > 1:
-        raise SystemExit(
-            f"No checkpoint at {path.resolve()}. Run python laya-tuned/train.py"
-        )
     print(f"Loading {model_id}…", flush=True)
     agent = laya.load(model_id)
     print("Ready.", flush=True)
     return agent
+
+
+def _display_id(model_id: str) -> str:
+    """Repo-relative path for local checkpoints, so reports hold no machine paths."""
+    path = Path(model_id).resolve()
+    if not path.exists():
+        return model_id
+    try:
+        return path.relative_to(ROOT).as_posix()
+    except ValueError:
+        return path.as_posix()
 
 
 def _score_model(
@@ -93,7 +101,7 @@ def _print_engine(eng: EngineStats) -> None:
     print(f"{'='*62}", flush=True)
     for cat, s in sorted(eng.cat.items()):
         acc = s["correct"] / s["total"] if s["total"] else 0
-        flag = "PASS" if acc >= 0.80 else "FAIL"
+        flag = "PASS" if acc >= PASS_THRESHOLD else "FAIL"
         print(
             f"  {flag} {cat:<24} {s['correct']:>3}/{s['total']:<3}  {acc*100:5.1f}%",
             flush=True,
@@ -144,7 +152,7 @@ def run(
             "suite": "laya-vs",
             "fixtures": len(fixtures),
             "untuned_id": untuned_id,
-            "tuned_id": str(Path(tuned_id).resolve()) if Path(tuned_id).exists() else tuned_id,
+            "tuned_id": _display_id(tuned_id),
         },
         "laya_untuned": {
             "model": base.name,

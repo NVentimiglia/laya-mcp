@@ -87,9 +87,13 @@ def train(
     freeze_encoder: bool,
     device: str | None,
     copy_base: bool,
+    seed: int = 42,
 ) -> None:
     import laya
     from laya.common import collate_items, proper_reward
+
+    # Seed so batch order, and the published numbers, reproduce.
+    torch.manual_seed(seed)
 
     rows: list[dict[str, Any]] = json.loads(
         train_path.read_text(encoding="utf-8")
@@ -194,6 +198,7 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--lr", type=float, default=2e-5)
     p.add_argument("--freeze-encoder", action="store_true")
     p.add_argument("--cpu", action="store_true")
+    p.add_argument("--seed", type=int, default=42)
     args = p.parse_args(argv)
     if not args.train.is_file():
         raise SystemExit(
@@ -212,9 +217,9 @@ def main(argv: list[str] | None = None) -> None:
     try:
         train(
             args.base, args.train, args.out, args.epochs, batch, args.lr,
-            freeze, device, copy_base=True,
+            freeze, device, copy_base=True, seed=args.seed,
         )
-    except (RuntimeError, torch.cuda.OutOfMemoryError) as exc:
+    except RuntimeError as exc:  # includes torch.cuda.OutOfMemoryError
         if device == "cpu":
             raise
         print(f"GPU train failed ({exc}); retrying CPU, freeze encoder", flush=True)
@@ -223,7 +228,7 @@ def main(argv: list[str] | None = None) -> None:
             torch.cuda.empty_cache()
         train(
             args.base, args.train, args.out, args.epochs, 1, args.lr,
-            True, "cpu", copy_base=False,
+            True, "cpu", copy_base=False, seed=args.seed,
         )
 
 

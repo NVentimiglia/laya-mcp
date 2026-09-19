@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import random
 import re
 from collections import defaultdict
@@ -20,7 +21,11 @@ from typing import Any
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-DEFAULT_SOURCE = Path(r"D:\Projects\QuantStudy\Repository\SIE\questions")
+# Sibling checkout by default; override with SIE_SOURCE or --source.
+DEFAULT_SOURCE = Path(
+    os.environ.get("SIE_SOURCE")
+    or ROOT.parent / "QuantStudy" / "Repository" / "SIE" / "questions"
+)
 DEFAULT_FIXTURES = ROOT / "laya-eval" / "fixtures.json"
 
 _FRONT = re.compile(r"^---\s*\n(.*?)\n---\s*\n(.*)\Z", re.S)
@@ -54,7 +59,9 @@ def parse_sie_markdown(text: str) -> dict[str, Any] | None:
     opts = {k: v.strip() for k, v in _OPT.findall(body)}
     if set(opts) != {"A", "B", "C", "D"}:
         return None
-    stem = body[: body.find("A)")].strip()
+    # Cut at the first option line, not the first "A)" in the text:
+    # stems like "(Appendix A)" contain one.
+    stem = body[: _OPT.search(body).start()].strip()
     stem = re.sub(r"\*\*Explanation:\*\*.*", "", stem, flags=re.S).strip()
     if not stem:
         return None
@@ -133,7 +140,7 @@ def split_holdout(
     for letter in ("A", "B", "C", "D"):
         group = list(by_letter.get(letter, []))
         rng.shuffle(group)
-        n_hold = max(1, int(round(len(group) * frac))) if group else 0
+        n_hold = max(1, round(len(group) * frac)) if group else 0
         holdout.extend(group[:n_hold])
         train.extend(group[n_hold:])
     rng.shuffle(train)
@@ -163,8 +170,6 @@ def convert(
             continue
         parsed.append(row)
     train, holdout = split_holdout(parsed, frac, seed)
-    hold_ids = {r["id"] for r in holdout}
-    train = [r for r in train if r["id"] not in hold_ids]
     train_path.write_text(
         json.dumps([to_train_row(r) for r in train], indent=2),
         encoding="utf-8",

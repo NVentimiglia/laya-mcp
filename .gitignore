@@ -20,3 +20,7 @@ skills-lock.json
 /.agents/plugins/
 /.agents/hooks/_*
 # END agent-kit
+/.agents
+.ai-memory.toml
+AGENTS.md
+AXIOMS.md

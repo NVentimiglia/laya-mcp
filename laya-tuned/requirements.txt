@@ -1,0 +1,6 @@
+# train.py uses laya internals (Agent._to_internal, laya.common); pin the minor.
+laya>=0.1.6,<0.2
+torch>=2.1.0
+huggingface_hub>=0.20.0
+safetensors>=0.4.0
+pytest>=8.0.0

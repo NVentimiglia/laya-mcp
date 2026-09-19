@@ -77,9 +77,9 @@ def _env() -> dict[str, str]:
 def _payload(result) -> dict:
     if not result.content:
         raise SystemExit("empty tool result")
+    if result.isError:
+        raise SystemExit(f"tool error: {result.content[0].text}")
     data = json.loads(result.content[0].text)
-    if isinstance(data, dict) and data.get("error"):
-        raise SystemExit(f"tool error: {data['error']}")
     if not isinstance(data, dict) or "answers" not in data:
         raise SystemExit(f"missing answers: {data!r}")
     return data
@@ -111,6 +111,13 @@ async def run() -> None:
                 data = _payload(result)
                 keys = ", ".join(data["answers"])
                 print(f"  {name} ok  answers={keys}", flush=True)
+            # No spaces: the old word-count guard let this through.
+            big = await session.call_tool(
+                "route_task", {"request": "x" * 20000}, read_timeout_seconds=TIMEOUT
+            )
+            if not big.isError:
+                raise SystemExit("oversized state was not rejected")
+            print(f"  oversized rejected: {big.content[0].text[:80]}", flush=True)
     print("smoke ok", flush=True)
 
 

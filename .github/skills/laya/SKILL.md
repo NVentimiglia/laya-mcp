@@ -8,8 +8,10 @@ description: Use Laya for fixed-shape decisions: labels, boolean probabilities, 
 # Laya Decision Engine
 
 Use Laya when a label, probability, or score is enough. Keep state
-under 512 tokens. Gate on `confidence_threshold` from the response;
-do not hardcode 0.85. Escalate missing, partial, or low-confidence
+under about 400 tokens; the server rejects state Laya cannot read in
+full and returns `isError: true`. Split long diffs by file or hunk.
+Gate on `confidence_threshold` from the response; do not hardcode
+0.85. Escalate errors and missing, partial, or low-confidence
 results.
 
 ## Tools

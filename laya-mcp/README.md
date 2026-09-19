@@ -4,7 +4,8 @@ MCP server that exposes [Laya](https://github.com/NandhaKishorM/laya)'s
 non-autoregressive decision engine to any LLM host that speaks the
 [Model Context Protocol](https://modelcontextprotocol.io).
 
-Single forward pass. ~35 ms. No text generation. Calibrated confidence.
+Single forward pass. ~25 ms median on GPU. No text generation.
+Calibrated confidence. Errors return `isError: true`.
 
 ## Install
 
@@ -54,7 +55,7 @@ python smoke_test.py
 | Variable | Default | Description |
 |---|---|---|
 | `LAYA_MODEL_ID` | `convaiinnovations/laya` | HuggingFace model repo |
-| `LAYA_MAX_STATE_TOKENS` | `512` | Hard token limit on state input |
+| `LAYA_MAX_STATE_TOKENS` | `512` | Upper cap on state tokens. The server also rejects state past the room Laya has after the question and options. |
 | `LAYA_CONFIDENCE_THRESHOLD` | `0.85` | Confidence gate for automated actions |
 
 ## Example call

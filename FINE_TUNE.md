@@ -83,13 +83,17 @@ python laya-tuned/eval_vs.py
 | `laya-tuned/eval_holdout.json` | ignored |
 | `laya-tuned/checkpoints/laya-sie` | ignored |
 
-`convert_sie.py` drops stems that match `finance_sie_*` in
+`convert_sie.py` reads `../QuantStudy/Repository/SIE/questions`
+next to this repo. Point it elsewhere with `SIE_SOURCE` or
+`--source`. It drops stems that match `finance_sie_*` in
 `laya-eval/fixtures.json`, skips flashcards, and writes a 10%
 holdout (seed 42, stratified A–D).
 
 `train.py` loads `convaiinnovations/laya`, writes only to
-`laya-tuned/checkpoints/laya-sie`. Leave `LAYA_MODEL_ID` on the
-public model.
+`laya-tuned/checkpoints/laya-sie`, and seeds batch order with
+`--seed` (default 42) so reruns match. Leave `LAYA_MODEL_ID` on the
+public model. Install its extras with
+`pip install -r laya-tuned/requirements.txt`.
 
 `eval_vs.py` is Laya-only: public weights vs `laya-sie` on the
 SIE holdout. No Jev, no Ollama.
@@ -132,5 +136,4 @@ That last command is Laya-only if you omit `--compare`. Prefer
 - [Laya GitHub](https://github.com/NandhaKishorM/laya)
 - [Fine-Tune Notebook (Colab)](https://github.com/NandhaKishorM/laya/blob/main/notebooks/laya_finetune_colab.ipynb)
 - [HuggingFace Model Card](https://huggingface.co/convaiinnovations/laya)
-- [SIE isolation notes](laya-tuned/TODO.md)
 - [Quant Green Book](https://quantgreenbook.com) — SIE dataset

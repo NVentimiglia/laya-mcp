@@ -34,23 +34,28 @@ from typing import Any
 import psutil
 import requests
 
-_JEV_DIR = Path(__file__).resolve().parent.parent / "laya-jev"
-if str(_JEV_DIR) not in sys.path:
-    sys.path.insert(0, str(_JEV_DIR))
+_ROOT = Path(__file__).resolve().parent.parent
+for _dir in (_ROOT / "laya-jev", _ROOT / "laya-eval"):
+    if str(_dir) not in sys.path:
+        sys.path.insert(0, str(_dir))
 
+# Scoring and Ollama helpers live in eval_laya so both tools score alike.
+from eval_laya import (  # noqa: E402
+    DEFAULT_LAYA_MODEL_ID,
+    DEFAULT_OLLAMA_MODEL as DEFAULT_MODEL,
+    OLLAMA_BASE,
+    OLLAMA_OPTIONS,
+    _extract_laya_answers,
+    _ollama_available,
+    _parse_ollama_json,
+    _score_fixture,
+)
 from jev_client import (  # noqa: E402
     DEFAULT_MODEL as DEFAULT_JEV_MODEL,
     JevClient,
     jev_available,
 )
 
-# ---------------------------------------------------------------------------
-# Constants
-# ---------------------------------------------------------------------------
-
-OLLAMA_BASE = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
-DEFAULT_MODEL = "gemma4:latest"
-DEFAULT_LAYA_MODEL_ID = "convaiinnovations/laya"
 
 def load_fixtures(path: Path) -> list[dict[str, Any]]:
     rows = json.loads(path.read_text(encoding='utf-8'))
@@ -122,69 +127,28 @@ def _rss_mb() -> float:
 
 
 # ---------------------------------------------------------------------------
-# Accuracy scoring
-# ---------------------------------------------------------------------------
-
-
-def _score(parsed: dict[str, Any], ground_truth: dict[str, Any]) -> tuple[int, int]:
-    """Return (correct_keys, total_keys) comparing parsed output to ground truth."""
-    correct = 0
-    total = len(ground_truth)
-    for key, expected in ground_truth.items():
-        predicted = parsed.get(key)
-        if predicted is None:
-            continue
-        # noul / boolean: compare threshold
-        if isinstance(expected, bool):
-            predicted_bool = (
-                predicted > 0.5 if isinstance(predicted, float) else bool(predicted)
-            )
-            if predicted_bool == expected:
-                correct += 1
-        else:
-            if str(predicted).lower() == str(expected).lower():
-                correct += 1
-    return correct, total
-
-
-def _flatten_answers(result: Any) -> dict[str, Any]:
-    if not isinstance(result, dict):
-        return {}
-    answers = result.get("answers")
-    if not isinstance(answers, dict):
-        return {}
-    parsed: dict[str, Any] = {}
-    for k, v in answers.items():
-        if not isinstance(v, dict):
-            parsed[k] = v
-            continue
-        if "choice" in v:
-            parsed[k] = v["choice"]
-        elif "noul" in v:
-            parsed[k] = v["noul"]
-        elif "score" in v:
-            parsed[k] = v["score"]
-    return parsed
-
-
-# ---------------------------------------------------------------------------
 # Laya benchmark
 # ---------------------------------------------------------------------------
 
 
 def _laya_call_direct(fixture: dict[str, Any], agent: Any) -> CallResult:
-    """Call Laya directly (no subprocess) if laya is importable."""
+    """Call Laya in-process. A failed call scores zero instead of ending the run."""
     questions = fixture["questions"]
     state = fixture["state"]
 
     mem_before = _rss_mb()
     t0 = time.perf_counter()
-    result = agent.predict(state, questions)
+    try:
+        result = agent.predict(state, questions)
+        err = None
+    except Exception as exc:  # noqa: BLE001
+        result, err = {"answers": {}}, str(exc)
+        print(f"  ERROR on {fixture['id']}: {exc}", flush=True)
     t1 = time.perf_counter()
     mem_after = _rss_mb()
 
-    parsed = _flatten_answers(result)
-    ck, tk = _score(parsed, fixture["ground_truth"])
+    parsed = _extract_laya_answers(result)
+    ck, tk = _score_fixture(parsed, fixture["ground_truth"])
 
     return CallResult(
         fixture_id=fixture["id"],
@@ -192,7 +156,7 @@ def _laya_call_direct(fixture: dict[str, Any], agent: Any) -> CallResult:
         ttft_ms=None,
         tokens_per_sec=None,
         mem_delta_mb=mem_after - mem_before,
-        raw_output=json.dumps(result),
+        raw_output=json.dumps(result) if err is None else err,
         parsed=parsed,
         correct_keys=ck,
         total_keys=tk,
@@ -284,8 +248,8 @@ def benchmark_jev(
                 t1 = time.perf_counter()
                 mem_after = _rss_mb()
 
-                parsed = _flatten_answers(result)
-                ck, tk = _score(parsed, fixture["ground_truth"])
+                parsed = _extract_laya_answers(result)
+                ck, tk = _score_fixture(parsed, fixture["ground_truth"])
                 call = CallResult(
                     fixture_id=fixture["id"],
                     latency_ms=(t1 - t0) * 1000,
@@ -330,7 +294,8 @@ def _ollama_stream(model: str, prompt: str) -> tuple[str, float, float, float]:
         "model": model,
         "prompt": prompt,
         "stream": True,
-        "options": {"temperature": 0.0, "seed": 42, "num_predict": 200},
+        "think": False,
+        "options": OLLAMA_OPTIONS,
     }
 
     t0 = time.perf_counter()
@@ -362,18 +327,6 @@ def _ollama_stream(model: str, prompt: str) -> tuple[str, float, float, float]:
     return full_text, ttft_ms, tps, total_ms
 
 
-def _parse_ollama_output(text: str) -> dict[str, Any]:
-    """Extract the first JSON object from Ollama's free-text response."""
-    start = text.find("{")
-    end = text.rfind("}") + 1
-    if start == -1 or end == 0:
-        return {}
-    try:
-        return json.loads(text[start:end])
-    except json.JSONDecodeError:
-        return {}
-
-
 def benchmark_ollama(
     fixtures: list[dict[str, Any]],
     n: int = 5,
@@ -381,9 +334,7 @@ def benchmark_ollama(
     verbose: bool = True,
 ) -> BenchmarkRun:
     """Run Ollama benchmark with streaming TTFT measurement."""
-    try:
-        requests.get(f"{OLLAMA_BASE}/api/tags", timeout=3).raise_for_status()
-    except Exception:  # noqa: BLE001
+    if not _ollama_available():
         print(f"  [SKIP] Ollama not reachable at {OLLAMA_BASE}.", flush=True)
         return BenchmarkRun(engine="ollama", model=model)
 
@@ -396,7 +347,8 @@ def benchmark_ollama(
     for pass_num in range(n):
         for fixture in fixtures:
             prompt_template = fixture["ollama_prompt"]
-            state_str = json.dumps(fixture["state"]) if isinstance(fixture["state"], dict) else fixture["state"]
+            state = fixture["state"]
+            state_str = state if isinstance(state, str) else json.dumps(state)
             prompt = prompt_template.replace("{state}", state_str)
 
             mem_before = _rss_mb()
@@ -420,8 +372,8 @@ def benchmark_ollama(
                 continue
             mem_after = _rss_mb()
 
-            parsed = _parse_ollama_output(text)
-            ck, tk = _score(parsed, fixture["ground_truth"])
+            parsed = _parse_ollama_json(text)
+            ck, tk = _score_fixture(parsed, fixture["ground_truth"])
 
             result = CallResult(
                 fixture_id=fixture["id"],

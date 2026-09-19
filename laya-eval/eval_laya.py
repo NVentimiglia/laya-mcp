@@ -28,7 +28,7 @@ Jev requires TYPESAFE_API_KEY. Default model: jev-latest.
 Exit code
 ---------
   0  every category >= 80% for every engine that ran
-  1  a category is below 80%, or no engine ran
+  1  a category is below 80%, no fixture matched, or no engine ran
 """
 
 from __future__ import annotations
@@ -53,7 +53,7 @@ from jev_client import (  # noqa: E402
     normalize_questions,
 )
 
-OLLAMA_BASE = "http://localhost:11434"
+OLLAMA_BASE = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
 DEFAULT_OLLAMA_MODEL = "gemma4:latest"
 DEFAULT_LAYA_MODEL_ID = "convaiinnovations/laya"
 
@@ -75,20 +75,32 @@ def _is_mcq(fx: dict[str, Any]) -> bool:
 # ---------------------------------------------------------------------------
 
 
+def _as_bool(value: Any) -> bool | None:
+    """Read a boolean answer: a bool, a noul probability, or "true"/"false".
+
+    Any other string is not a boolean answer. bool("false") is True, so
+    strings must never go through bool().
+    """
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return value > 0.5
+    if isinstance(value, str):
+        text = value.strip().lower()
+        if text in ("true", "yes"):
+            return True
+        if text in ("false", "no"):
+            return False
+    return None
+
+
 def _score_answer(predicted: Any, expected: Any) -> bool:
     if predicted is None:
         return False
+    if isinstance(expected, str) and expected.strip().lower() in ("true", "false"):
+        expected = expected.strip().lower() == "true"
     if isinstance(expected, bool):
-        if isinstance(predicted, float):
-            return (predicted > 0.5) == expected
-        return bool(predicted) == expected
-    if isinstance(expected, str) and expected.lower() in ("true", "false"):
-        expected_bool = expected.lower() == "true"
-        if isinstance(predicted, float):
-            return (predicted > 0.5) == expected_bool
-        if isinstance(predicted, bool):
-            return predicted == expected_bool
-        return str(predicted).lower() == expected.lower()
+        return _as_bool(predicted) is expected
     return str(predicted).strip().lower() == str(expected).strip().lower()
 
 
@@ -141,26 +153,38 @@ def _ollama_prompt_mcq(fx: dict[str, Any]) -> str:
 
 
 def _ollama_prompt_decision(fx: dict[str, Any]) -> str:
-    """Structured JSON prompt for decision fixtures."""
-    state = _state_text(fx.get("input", fx.get("state")))
-    gt = fx["ground_truth"]
-    keys = list(gt.keys())
+    """Structured JSON prompt for decision fixtures.
 
-    schema_parts = []
-    for key in keys:
-        expected = gt[key]
-        if isinstance(expected, bool) or (isinstance(expected, str) and expected.lower() in ("true", "false")):
+    Gives Ollama the same instructions and labels Laya and Jev get, so
+    a miss means a wrong answer, not an unknown label.
+    """
+    state = _state_text(fx.get("input", fx.get("state")))
+    questions = normalize_questions(fx["questions"])
+
+    schema_parts: list[str] = []
+    guide: list[str] = []
+    for key in fx["ground_truth"]:
+        q = questions.get(key, {})
+        criteria = q.get("criteria")
+        guide.append(f"- {key}: {q.get('instructions', '')}")
+        if q.get("type") == "noul":
             schema_parts.append(f'"{key}": true|false')
+        elif isinstance(criteria, dict):
+            schema_parts.append(f'"{key}": "' + "|".join(criteria) + '"')
+            guide.extend(f"    {label}: {desc}" for label, desc in criteria.items())
+        elif isinstance(criteria, list):
+            schema_parts.append(f'"{key}": "' + "|".join(map(str, criteria)) + '"')
         else:
             schema_parts.append(f'"{key}": "..."')
 
     schema = "{" + ", ".join(schema_parts) + "}"
 
     return (
-        f"Evaluate the following input and return ONLY a JSON object with this exact schema:\n"
+        "Evaluate the input and return ONLY a JSON object with this exact schema:\n"
         f"{schema}\n\n"
+        "Fields:\n" + "\n".join(guide) + "\n\n"
         f"Input:\n{state}\n\n"
-        f"Reply with only the JSON object. No explanation."
+        "Reply with only the JSON object. No explanation."
     )
 
 
@@ -194,16 +218,21 @@ def _ollama_available() -> bool:
         return False
 
 
-def _ollama_call(prompt: str, model: str) -> tuple[dict[str, Any], float]:
+# think=False: thinking models (gemma4, qwen3) spend num_predict on
+# hidden reasoning and return empty content when they run out.
+OLLAMA_OPTIONS = {"temperature": 0.0, "seed": 42, "num_predict": 200}
+
+
+def _ollama_call(prompt: str, model: str) -> tuple[dict[str, Any], float, str]:
     """
     Call Ollama using /api/chat with format=json for reliable structured output.
     Falls back to /api/generate if /api/chat is unavailable.
+
+    Returns (parsed, latency_ms, raw_text).
     """
     import requests  # noqa: PLC0415
 
     t0 = time.perf_counter()
-
-    # Try /api/chat with format:json first — much more reliable for structured output
     try:
         resp = requests.post(
             f"{OLLAMA_BASE}/api/chat",
@@ -211,7 +240,8 @@ def _ollama_call(prompt: str, model: str) -> tuple[dict[str, Any], float]:
                 "model": model,
                 "format": "json",
                 "stream": False,
-                "options": {"temperature": 0.0, "seed": 42, "num_predict": 120},
+                "think": False,
+                "options": OLLAMA_OPTIONS,
                 "messages": [{"role": "user", "content": prompt}],
             },
             timeout=120,
@@ -219,7 +249,7 @@ def _ollama_call(prompt: str, model: str) -> tuple[dict[str, Any], float]:
         resp.raise_for_status()
         latency_ms = (time.perf_counter() - t0) * 1000
         text = resp.json().get("message", {}).get("content", "")
-        return _parse_ollama_json(text), latency_ms
+        return _parse_ollama_json(text), latency_ms, text
     except Exception as exc:
         print(
             f"WARNING: Ollama /api/chat failed ({type(exc).__name__}: {exc}); "
@@ -227,16 +257,17 @@ def _ollama_call(prompt: str, model: str) -> tuple[dict[str, Any], float]:
             flush=True,
         )
 
-    # Fallback: /api/generate (streaming=False)
+    t0 = time.perf_counter()
     resp = requests.post(
         f"{OLLAMA_BASE}/api/generate",
         json={"model": model, "prompt": prompt, "stream": False,
-              "options": {"temperature": 0.0, "seed": 42, "num_predict": 120}},
+              "think": False, "options": OLLAMA_OPTIONS},
         timeout=120,
     )
+    resp.raise_for_status()
     latency_ms = (time.perf_counter() - t0) * 1000
     text = resp.json().get("response", "")
-    return _parse_ollama_json(text), latency_ms
+    return _parse_ollama_json(text), latency_ms, text
 
 
 # ---------------------------------------------------------------------------
@@ -255,7 +286,8 @@ class EngineStats:
 
     def add(self, fid: str, category: str, difficulty: str | None,
             predicted: dict[str, Any], ground_truth: dict[str, Any],
-            latency_ms: float, error: str | None = None) -> tuple[int, int]:
+            latency_ms: float, error: str | None = None,
+            raw: str | None = None) -> tuple[int, int]:
         correct, total = _score_fixture(predicted, ground_truth)
 
         cs = self.cat.setdefault(category, {"correct": 0, "total": 0})
@@ -276,6 +308,8 @@ class EngineStats:
             "accuracy": round(correct / total, 4) if total else 0,
             "latency_ms": round(latency_ms, 2), "error": error,
         })
+        if raw is not None:
+            self.records[-1]["raw"] = raw
         return correct, total
 
     @property
@@ -340,7 +374,7 @@ def run_eval(
 
     if not fixtures:
         print("No fixtures to run.", flush=True)
-        return 0
+        return 1
 
     # --- Laya setup ---
     laya_stats = EngineStats("Laya")
@@ -467,12 +501,13 @@ def _run_fixtures(
         if run_ollama:
             prompt = _ollama_prompt_mcq(fx) if mcq else _ollama_prompt_decision(fx)
             try:
-                predicted_o, latency_ms_o = _ollama_call(prompt, ollama_model)
+                predicted_o, latency_ms_o, raw_o = _ollama_call(prompt, ollama_model)
                 err_o = None
             except Exception as exc:  # noqa: BLE001
-                predicted_o, latency_ms_o, err_o = {}, 0.0, str(exc)
+                predicted_o, latency_ms_o, raw_o, err_o = {}, 0.0, None, str(exc)
             ollama_correct, ollama_total = ollama_stats.add(
-                fid, category, difficulty, predicted_o, ground_truth, latency_ms_o, err_o)
+                fid, category, difficulty, predicted_o, ground_truth,
+                latency_ms_o, err_o, raw=raw_o)
 
         # Print row
         parts = [f"  {fid:<42}"]
@@ -506,7 +541,7 @@ def _run_fixtures(
         print(f"{'='*62}", flush=True)
         for cat, s in sorted(eng.cat.items()):
             acc = s["correct"] / s["total"] if s["total"] else 0
-            flag = "✓" if acc >= 0.80 else "✗"
+            flag = "✓" if acc >= PASS_THRESHOLD else "✗"
             print(f"  {flag} {cat:<24} {s['correct']:>3}/{s['total']:<3}  {acc*100:5.1f}%", flush=True)
 
         if eng.diff:
@@ -516,7 +551,7 @@ def _run_fixtures(
                 if not s:
                     continue
                 acc = s["correct"] / s["total"] if s["total"] else 0
-                flag = "✓" if acc >= 0.80 else "✗"
+                flag = "✓" if acc >= PASS_THRESHOLD else "✗"
                 print(f"    {flag} {diff:<20} {s['correct']:>3}/{s['total']:<3}  {acc*100:5.1f}%", flush=True)
 
         print(f"\n  Overall: {eng.overall_correct}/{eng.overall_total}  "
@@ -527,7 +562,9 @@ def _run_fixtures(
         print(f"\n{'='*width}", flush=True)
         print("COMPARISON", flush=True)
         print(f"{'='*width}", flush=True)
-        header = f"  {'Metric':<22}" + "".join(f"{eng.name:>16}" for eng in engines)
+        header = f"  {'Metric':<22}" + "".join(
+            f"{_report_key(eng.name).capitalize():>16}" for eng in engines
+        )
         print(header, flush=True)
         print(f"  {'-'*(width-2)}", flush=True)
         acc = "".join(f"{eng.accuracy*100:>15.1f}%" for eng in engines)
@@ -596,6 +633,9 @@ def _run_fixtures(
 
 
 def main(argv: list[str] | None = None) -> None:
+    # ✓/✗ marks crash a cp1252 Windows console when output is piped.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     p = argparse.ArgumentParser(description="Laya quality evaluation harness")
     p.add_argument("--fixtures", type=Path,
                    default=Path(__file__).parent / "fixtures.json")
